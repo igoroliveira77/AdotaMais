@@ -10,20 +10,15 @@ body {
     color: #333;
 }
 
-
-/* NAVBAR */
+/* Navbar */
 
 .navbar {
     height: 70px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     padding: 0 8%;
-
     background-color: white;
-
     border-bottom: 1px solid #eee;
 }
 
@@ -40,7 +35,6 @@ body {
 .navbar nav a {
     text-decoration: none;
     color: #333;
-
     font-size: 15px;
 }
 
@@ -55,31 +49,23 @@ body {
 
 .btn-login {
     padding: 10px 18px;
-
     color: #333;
 }
 
 .btn-register {
     padding: 10px 18px;
-
     background-color: #ff7a59;
-
     color: white;
-
     border-radius: 8px;
 }
 
-
-/* HERO */
+/* Hero */
 
 .hero {
     min-height: 480px;
-
     display: flex;
     align-items: center;
-
     padding: 60px 8%;
-
     background-color: #fff1eb;
 }
 
@@ -90,37 +76,27 @@ body {
 .hero h1 {
     font-size: 52px;
     line-height: 1.1;
-
     margin-bottom: 25px;
 }
 
 .hero p {
     font-size: 18px;
     line-height: 1.6;
-
     margin-bottom: 30px;
-
     color: #666;
 }
 
 .btn-primary {
     display: inline-block;
-
     padding: 14px 24px;
-
     background-color: #ff7a59;
-
     color: white;
-
     text-decoration: none;
-
     border-radius: 8px;
-
     font-weight: bold;
 }
 
-
-/* ANIMAIS */
+/* Animais */
 
 .animais-section {
     padding: 70px 8%;
@@ -128,13 +104,11 @@ body {
 
 .section-header {
     text-align: center;
-
     margin-bottom: 40px;
 }
 
 .section-header h2 {
     font-size: 32px;
-
     margin-bottom: 10px;
 }
 
@@ -142,49 +116,34 @@ body {
     color: #777;
 }
 
-
-/* GRID */
-
 .animais-grid {
     display: grid;
-
     grid-template-columns: repeat(3, 1fr);
-
     gap: 25px;
 }
 
-
-/* CARD */
+/* Cards */
 
 .animal-card {
     background-color: white;
-
     border-radius: 12px;
-
     overflow: hidden;
-
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
 .animal-image {
     height: 200px;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     background-color: #ffe6dc;
-
     font-size: 60px;
-
     overflow: hidden;
 }
 
 .animal-image img {
     width: 100%;
     height: 100%;
-
     object-fit: cover;
 }
 
@@ -194,47 +153,124 @@ body {
 
 .animal-info h3 {
     font-size: 22px;
-
     margin-bottom: 10px;
 }
 
 .animal-info p {
     margin-bottom: 8px;
-
     color: #666;
 }
 
 .btn-card {
     display: inline-block;
-
     margin-top: 15px;
-
     padding: 10px 16px;
-
     background-color: #ff7a59;
-
     color: white;
-
     text-decoration: none;
-
     border-radius: 7px;
 }
 
+/* Página de detalhes */
 
-/* FOOTER */
+.detalhes-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 50px 5%;
+}
+
+.voltar {
+    display: inline-block;
+    margin-bottom: 30px;
+    color: #555;
+    text-decoration: none;
+}
+
+.voltar:hover {
+    color: #ff7a59;
+}
+
+.animal-detalhes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.detalhes-imagem {
+    height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffe6dc;
+    border-radius: 12px;
+    overflow: hidden;
+    font-size: 80px;
+}
+
+.detalhes-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.detalhes-info h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.animal-especie {
+    font-size: 18px;
+    color: #ff7a59;
+    margin-bottom: 30px;
+}
+
+.informacoes {
+    margin-bottom: 30px;
+}
+
+.informacoes p {
+    margin-bottom: 12px;
+    color: #555;
+}
+
+.detalhes-info h2 {
+    margin-bottom: 15px;
+}
+
+.descricao {
+    line-height: 1.7;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.btn-adotar {
+    display: inline-block;
+    padding: 14px 25px;
+    background-color: #ff7a59;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.btn-adotar:hover {
+    opacity: 0.9;
+}
+
+/* Footer */
 
 footer {
     padding: 30px;
-
     text-align: center;
-
     background-color: #222;
-
     color: white;
 }
 
-
-/* RESPONSIVIDADE */
+/* Responsividade */
 
 @media (max-width: 900px) {
 
@@ -244,6 +280,17 @@ footer {
 
 }
 
+@media (max-width: 800px) {
+
+    .animal-detalhes {
+        grid-template-columns: 1fr;
+    }
+
+    .detalhes-imagem {
+        height: 350px;
+    }
+
+}
 
 @media (max-width: 600px) {
 
@@ -272,3 +319,4 @@ footer {
     }
 
 }
+

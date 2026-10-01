@@ -10,3 +10,12 @@ def inicio(request):
     }
 
     return render(request, 'core/inicio.html', contexto)
+
+def detalhes_animal(request, id):
+    animal = Animal.objects.get(id=id)
+
+    contexto = {
+        'animal': animal
+    }
+
+    return render(request, 'core/detalhes_animal.html', contexto)
