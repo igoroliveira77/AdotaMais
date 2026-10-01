@@ -1,0 +1,274 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+
+/* NAVBAR */
+
+.navbar {
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 8%;
+
+    background-color: white;
+
+    border-bottom: 1px solid #eee;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar nav {
+    display: flex;
+    gap: 30px;
+}
+
+.navbar nav a {
+    text-decoration: none;
+    color: #333;
+
+    font-size: 15px;
+}
+
+.navbar-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.navbar-buttons a {
+    text-decoration: none;
+}
+
+.btn-login {
+    padding: 10px 18px;
+
+    color: #333;
+}
+
+.btn-register {
+    padding: 10px 18px;
+
+    background-color: #ff7a59;
+
+    color: white;
+
+    border-radius: 8px;
+}
+
+
+/* HERO */
+
+.hero {
+    min-height: 480px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 60px 8%;
+
+    background-color: #fff1eb;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero h1 {
+    font-size: 52px;
+    line-height: 1.1;
+
+    margin-bottom: 25px;
+}
+
+.hero p {
+    font-size: 18px;
+    line-height: 1.6;
+
+    margin-bottom: 30px;
+
+    color: #666;
+}
+
+.btn-primary {
+    display: inline-block;
+
+    padding: 14px 24px;
+
+    background-color: #ff7a59;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+}
+
+
+/* ANIMAIS */
+
+.animais-section {
+    padding: 70px 8%;
+}
+
+.section-header {
+    text-align: center;
+
+    margin-bottom: 40px;
+}
+
+.section-header h2 {
+    font-size: 32px;
+
+    margin-bottom: 10px;
+}
+
+.section-header p {
+    color: #777;
+}
+
+
+/* GRID */
+
+.animais-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+
+/* CARD */
+
+.animal-card {
+    background-color: white;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.animal-image {
+    height: 200px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background-color: #ffe6dc;
+
+    font-size: 60px;
+
+    overflow: hidden;
+}
+
+.animal-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.animal-info {
+    padding: 20px;
+}
+
+.animal-info h3 {
+    font-size: 22px;
+
+    margin-bottom: 10px;
+}
+
+.animal-info p {
+    margin-bottom: 8px;
+
+    color: #666;
+}
+
+.btn-card {
+    display: inline-block;
+
+    margin-top: 15px;
+
+    padding: 10px 16px;
+
+    background-color: #ff7a59;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 7px;
+}
+
+
+/* FOOTER */
+
+footer {
+    padding: 30px;
+
+    text-align: center;
+
+    background-color: #222;
+
+    color: white;
+}
+
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 900px) {
+
+    .animais-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .navbar nav {
+        display: none;
+    }
+
+    .navbar {
+        padding: 0 5%;
+    }
+
+    .hero {
+        padding: 50px 5%;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .animais-section {
+        padding: 50px 5%;
+    }
+
+    .animais-grid {
+        grid-template-columns: 1fr;
+    }
+
+}

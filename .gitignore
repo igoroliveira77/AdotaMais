@@ -1,0 +1,22 @@
+# Ambiente virtual
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Variáveis de ambiente
+.env
+
+# Banco SQLite, caso seja criado futuramente
+db.sqlite3
+
+# Arquivos enviados pelo usuário
+media/
+
+# Arquivos do VS Code
+.vscode/
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db

@@ -1,0 +1,155 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Adota+ | Encontre um amigo</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            🐾 Adota+
+        </div>
+
+        <nav>
+
+            <a href="/">Início</a>
+
+            <a href="#">Animais</a>
+
+            <a href="#">Sobre nós</a>
+
+            <a href="#">Contato</a>
+
+        </nav>
+
+        <div class="navbar-buttons">
+
+            <a href="#" class="btn-login">Entrar</a>
+
+            <a href="#" class="btn-register">Cadastrar</a>
+
+        </div>
+
+    </header>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                Encontre um amigo
+                para toda a vida. 🐾
+            </h1>
+
+            <p>
+                Existem muitos animais esperando por uma
+                família. Encontre seu novo melhor amigo.
+            </p>
+
+            <a href="#animais" class="btn-primary">
+                Encontrar um animal
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ANIMAIS -->
+
+    <main id="animais" class="animais-section">
+
+        <div class="section-header">
+
+            <h2>Animais disponíveis</h2>
+
+            <p>
+                Conheça alguns animais que estão esperando
+                por uma nova família.
+            </p>
+
+        </div>
+
+
+        <div class="animais-grid">
+
+            {% for animal in animais %}
+
+                <article class="animal-card">
+
+                    <div class="animal-image">
+
+                        {% if animal.foto %}
+                             <img src="{{ animal.foto.url }}" alt="{{ animal.nome }}">
+                        
+                        {% else %}
+                            🐾
+                        {% endif %}
+
+                    </div>
+
+                    <div class="animal-info">
+
+                        <h3>{{ animal.nome }}</h3>
+
+                        <p>
+                            {{ animal.especie }} •
+                            {{ animal.idade }} anos
+                        </p>
+
+                        <p>
+                            📍 {{ animal.cidade }}
+                        </p>
+
+                        <a href="#" class="btn-card">
+                            Ver detalhes
+                        </a>
+
+                    </div>
+
+                </article>
+
+            {% empty %}
+
+                <p>
+                    Nenhum animal disponível no momento.
+                </p>
+
+            {% endfor %}
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 Adota+ — Todos os direitos reservados.
+        </p>
+
+    </footer>
+
+</body>
+
+</html>
