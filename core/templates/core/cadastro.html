@@ -1,0 +1,132 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cadastrar | Adota+</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=3">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            🐾 Adota+
+        </div>
+
+        <nav>
+            <a href="/">Início</a>
+            <a href="#">Animais</a>
+            <a href="#">Sobre nós</a>
+            <a href="#">Contato</a>
+        </nav>
+
+        <div class="navbar-buttons">
+            <a href="{% url 'login' %}" class="btn-login">Entrar</a>
+        </div>
+
+    </header>
+
+    <main class="login-container">
+
+        <div class="login-box">
+
+            <h1>Criar conta</h1>
+
+            <p class="login-subtitle">
+                Crie sua conta para fazer parte do Adota+.
+            </p>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="username">Usuário</label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Senha</label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password_confirm">
+                        Confirmar senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password_confirm"
+                        name="password_confirm"
+                        required
+                    >
+                </div>
+
+                {% if erro %}
+                    <p class="login-error">
+                        {{ erro }}
+                    </p>
+                {% endif %}
+
+                <button type="submit" class="btn-login-form">
+                    Criar conta
+                </button>
+
+            </form>
+
+            <p class="cadastro-link">
+
+                Já possui uma conta?
+
+                <a href="{% url 'login' %}">
+                    Entrar
+                </a>
+
+            </p>
+
+        </div>
+
+    </main>
+
+    <footer>
+
+        <p>
+            © 2026 Adota+ — Todos os direitos reservados.
+        </p>
+
+    </footer>
+
+</body>
+
+</html>
