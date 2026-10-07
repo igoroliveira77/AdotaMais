@@ -44,7 +44,7 @@
                 <a href="{% url 'logout' %}" class="btn-register">Sair</a>
             {% else %}
                 <a href="{% url 'login' %}" class="btn-login">Entrar</a>
-                <a href="#" class="btn-register">Cadastrar</a>
+                <a href="{% url 'cadastro' %}" class="btn-register">Cadastrar</a>
             {% endif %}
 
         </div>
