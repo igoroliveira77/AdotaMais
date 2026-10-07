@@ -320,3 +320,196 @@ footer {
 
 }
 
+/* Login */
+
+.login-container {
+    min-height: calc(100vh - 130px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 50px 20px;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 420px;
+
+    padding: 35px;
+
+    background-color: white;
+
+    border-radius: 15px;
+
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.login-box h1 {
+    text-align: center;
+
+    margin-bottom: 10px;
+}
+
+.login-subtitle {
+    text-align: center;
+
+    color: #777;
+
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+}
+
+.btn-login-form {
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background-color: #ff7a59;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.btn-login-form:hover {
+    opacity: 0.9;
+}
+
+.login-error {
+    margin-bottom: 15px;
+
+    color: #d9534f;
+
+    text-align: center;
+}
+
+.cadastro-link {
+    margin-top: 25px;
+
+    text-align: center;
+
+    color: #666;
+}
+
+.cadastro-link a {
+    color: #ff7a59;
+
+    text-decoration: none;
+
+    font-weight: bold;
+}
+
+/* Login */
+
+.login-container {
+    min-height: calc(100vh - 130px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 420px;
+    padding: 35px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.login-box h1 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.login-subtitle {
+    text-align: center;
+    color: #777;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.btn-login-form {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 8px;
+    background-color: #ff7a59;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-login-form:hover {
+    opacity: 0.9;
+}
+
+.login-error {
+    margin-bottom: 15px;
+    color: #d9534f;
+    text-align: center;
+}
+
+.cadastro-link {
+    margin-top: 25px;
+    text-align: center;
+    color: #666;
+}
+
+.cadastro-link a {
+    color: #ff7a59;
+    text-decoration: none;
+    font-weight: bold;
+}

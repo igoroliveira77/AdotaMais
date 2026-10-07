@@ -39,9 +39,13 @@
 
         <div class="navbar-buttons">
 
-            <a href="#" class="btn-login">Entrar</a>
-
-            <a href="#" class="btn-register">Cadastrar</a>
+            {% if user.is_authenticated %}
+                <span>Olá, {{ user.username }}!</span>
+                <a href="{% url 'logout' %}" class="btn-register">Sair</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn-login">Entrar</a>
+                <a href="#" class="btn-register">Cadastrar</a>
+            {% endif %}
 
         </div>
 
