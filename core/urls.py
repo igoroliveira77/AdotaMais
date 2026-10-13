@@ -27,4 +27,10 @@ urlpatterns = [
     views.cadastro_usuario,
     name='cadastro'
     ),
+
+    path(
+    'animal/<int:id>/adotar/',
+    views.solicitar_adocao,
+    name='solicitar_adocao'
+    ),
 ]

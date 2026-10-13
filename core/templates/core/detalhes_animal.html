@@ -37,11 +37,13 @@
 
         <div class="navbar-buttons">
 
-            <a href="{% url 'login' %}" class="btn-login">
-                Entrar
-            </a>
-
-            <a href="#" class="btn-register">Cadastrar</a>
+            {% if user.is_authenticated %}
+                <span>Olá, {{ user.username }}!</span>
+                <a href="{% url 'logout' %}" class="btn-register">Sair</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn-login">Entrar</a>
+                <a href="{% url 'cadastro' %}" class="btn-register">Cadastrar</a>
+            {% endif %}
 
         </div>
 
@@ -77,6 +79,12 @@
 
 
             <div class="detalhes-info">
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="login-subtitle">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
 
                 <h1>{{ animal.nome }}</h1>
 
@@ -117,9 +125,12 @@
                 </p>
 
 
-                <a href="#" class="btn-adotar">
-                    ❤️ Quero adotar
-                </a>
+                <form method="POST" action="{% url 'solicitar_adocao' animal.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-adotar">
+                        ❤️ Quero adotar
+                    </button>
+                </form>
 
             </div>
 

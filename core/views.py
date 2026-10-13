@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.contrib.auth.models import User
-from .models import Animal
+from .models import Animal, SolicitacaoAdocao
 
 
 def inicio(request):
@@ -24,10 +26,9 @@ def detalhes_animal(request, id):
     return render(request, 'core/detalhes_animal.html', contexto)
 
 
+
 def login_usuario(request):
-
     if request.method == 'POST':
-
         username = request.POST.get('username')
         password = request.POST.get('password')
 
@@ -38,22 +39,23 @@ def login_usuario(request):
         )
 
         if usuario is not None:
-
             login(request, usuario)
+
+            proxima_pagina = request.POST.get('next') or request.GET.get('next')
+
+            if proxima_pagina and proxima_pagina.startswith('/'):
+                return redirect(proxima_pagina)
 
             return redirect('inicio')
 
-        else:
-
-            return render(
-                request,
-                'core/login.html',
-                {
-                    'erro': 'Usuário ou senha incorretos.'
-                }
-            )
+        return render(
+            request,
+            'core/login.html',
+            {'erro': 'Usuário ou senha incorretos.'}
+        )
 
     return render(request, 'core/login.html')
+
 
 def logout_usuario(request):
     logout(request)
@@ -91,3 +93,34 @@ def cadastro_usuario(request):
         return redirect('inicio')
 
     return render(request, 'core/cadastro.html')
+
+@login_required(login_url='login')
+def solicitar_adocao(request, id):
+    if request.method != 'POST':
+        return redirect('detalhes_animal', id=id)
+
+    animal = get_object_or_404(Animal, id=id, status='Disponível')
+
+    solicitacao_existente = SolicitacaoAdocao.objects.filter(
+        usuario=request.user,
+        animal=animal
+    ).exclude(status='Recusada').exists()
+
+    if solicitacao_existente:
+        messages.warning(
+            request,
+            'Você já possui uma solicitação para este animal.'
+        )
+        return redirect('detalhes_animal', id=id)
+
+    SolicitacaoAdocao.objects.create(
+        usuario=request.user,
+        animal=animal
+    )
+
+    messages.success(
+        request,
+        'Sua solicitação de adoção foi enviada com sucesso!'
+    )
+
+    return redirect('detalhes_animal', id=id)
