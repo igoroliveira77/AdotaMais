@@ -11,8 +11,7 @@
 
     <title>{{ animal.nome }} | Adota+</title>
 
-    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=2">
-
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=4">
 </head>
 
 <body>
@@ -38,6 +37,9 @@
         <div class="navbar-buttons">
 
             {% if user.is_authenticated %}
+                <a href="{% url 'minhas_solicitacoes' %}" class="btn-minhas-solicitacoes">
+                    Minhas solicitações
+                </a>
                 <span>Olá, {{ user.username }}!</span>
                 <a href="{% url 'logout' %}" class="btn-register">Sair</a>
             {% else %}

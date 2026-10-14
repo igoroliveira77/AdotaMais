@@ -124,3 +124,15 @@ def solicitar_adocao(request, id):
     )
 
     return redirect('detalhes_animal', id=id)
+
+@login_required(login_url='login')
+def minhas_solicitacoes(request):
+    solicitacoes = SolicitacaoAdocao.objects.filter(
+        usuario=request.user
+    ).select_related('animal').order_by('-data_solicitacao')
+
+    contexto = {
+        'solicitacoes': solicitacoes
+    }
+
+    return render(request, 'core/minhas_solicitacoes.html', contexto)

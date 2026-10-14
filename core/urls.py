@@ -33,4 +33,10 @@ urlpatterns = [
     views.solicitar_adocao,
     name='solicitar_adocao'
     ),
+
+    path(
+    'minhas-solicitacoes/',
+    views.minhas_solicitacoes,
+    name='minhas_solicitacoes'
+    ),
 ]
