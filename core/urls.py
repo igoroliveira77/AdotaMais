@@ -39,4 +39,10 @@ urlpatterns = [
     views.minhas_solicitacoes,
     name='minhas_solicitacoes'
     ),
+
+    path(
+    'solicitacao/<int:id>/cancelar/',
+    views.cancelar_solicitacao,
+    name='cancelar_solicitacao'
+    ),
 ]

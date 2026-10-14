@@ -40,7 +40,10 @@
                 <a href="{% url 'minhas_solicitacoes' %}" class="btn-minhas-solicitacoes">
                     Minhas solicitações
                 </a>
-                <span>Olá, {{ user.username }}!</span>
+                <span class="usuario-logado">
+                    <span class="usuario-icone">👤</span>
+                    {{ user.username|capfirst }}
+                </span>
                 <a href="{% url 'logout' %}" class="btn-register">Sair</a>
             {% else %}
                 <a href="{% url 'login' %}" class="btn-login">Entrar</a>

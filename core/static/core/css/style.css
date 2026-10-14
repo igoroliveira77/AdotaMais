@@ -616,11 +616,19 @@ footer {
 }
 
 .solicitacao-acoes {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
     margin-top: 15px;
 }
 
 .solicitacao-acoes a {
     text-decoration: none;
+}
+
+.solicitacao-acoes form {
+    margin: 0;
 }
 
 .solicitacoes-vazia {
@@ -672,4 +680,61 @@ footer {
 .navbar-buttons .btn-minhas-solicitacoes:hover {
     background-color: #ff7a59;
     color: #fff;
+}
+
+.usuario-logado {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #333;
+    font-size: 15px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.usuario-icone {
+    font-size: 18px;
+    line-height: 1;
+}
+
+.btn-cancelar-solicitacao {
+    background-color: #fff;
+    color: #d9534f;
+    border: 1px solid #d9534f;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-cancelar-solicitacao:hover {
+    background-color: #d9534f;
+    color: #fff;
+}
+
+.secao-solicitacoes {
+    margin-top: 35px;
+}
+
+.secao-solicitacoes > h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 22px;
+}
+
+.secao-historico {
+    padding-top: 25px;
+    border-top: 1px solid #e8e8e8;
+}
+
+.status-cancelada {
+    background-color: #fce8e6;
+    color: #b42318;
+}
+
+.historico-vazio {
+    color: #777;
+    margin-bottom: 25px;
 }

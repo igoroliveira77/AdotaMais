@@ -26,6 +26,7 @@ class SolicitacaoAdocao(models.Model):
         ('Em análise', 'Em análise'),
         ('Aprovada', 'Aprovada'),
         ('Recusada', 'Recusada'),
+        ('Cancelada', 'Cancelada'),
     ]
 
     usuario = models.ForeignKey(

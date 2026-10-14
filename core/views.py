@@ -104,7 +104,9 @@ def solicitar_adocao(request, id):
     solicitacao_existente = SolicitacaoAdocao.objects.filter(
         usuario=request.user,
         animal=animal
-    ).exclude(status='Recusada').exists()
+    ).exclude(
+        status__in=['Recusada', 'Cancelada']
+    ).exists()
 
     if solicitacao_existente:
         messages.warning(
@@ -131,8 +133,45 @@ def minhas_solicitacoes(request):
         usuario=request.user
     ).select_related('animal').order_by('-data_solicitacao')
 
+    solicitacoes_ativas = solicitacoes.filter(
+        status__in=['Pendente', 'Em análise', 'Aprovada']
+    )
+
+    historico_solicitacoes = solicitacoes.filter(
+        status__in=['Cancelada', 'Recusada']
+    )
+
     contexto = {
-        'solicitacoes': solicitacoes
+        'solicitacoes_ativas': solicitacoes_ativas,
+        'historico_solicitacoes': historico_solicitacoes,
     }
 
     return render(request, 'core/minhas_solicitacoes.html', contexto)
+
+@login_required(login_url='login')
+def cancelar_solicitacao(request, id):
+    if request.method != 'POST':
+        return redirect('minhas_solicitacoes')
+
+    solicitacao = get_object_or_404(
+        SolicitacaoAdocao,
+        id=id,
+        usuario=request.user
+    )
+
+    if solicitacao.status != 'Pendente':
+        messages.warning(
+            request,
+            'Não é possível cancelar esta solicitação.'
+        )
+        return redirect('minhas_solicitacoes')
+
+    solicitacao.status = 'Cancelada'
+    solicitacao.save()
+
+    messages.success(
+        request,
+        'Solicitação de adoção cancelada com sucesso!'
+    )
+
+    return redirect('minhas_solicitacoes')
