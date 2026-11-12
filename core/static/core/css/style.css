@@ -967,3 +967,59 @@ footer {
     border-radius: 12px;
     box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
 }
+
+/* ATIVIDADES RECENTES */
+
+.admin-atividades {
+    margin-top: 40px;
+}
+
+.admin-atividades h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.admin-atividade-lista {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+    padding: 5px 20px;
+}
+
+.admin-atividade-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.admin-atividade-item:last-child {
+    border-bottom: none;
+}
+
+.admin-atividade-item strong {
+    color: #e76f51;
+    font-size: 14px;
+}
+
+.admin-atividade-item p {
+    color: #666;
+    font-size: 14px;
+    margin: 6px 0 0;
+}
+
+.admin-atividade-item span {
+    color: #888;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+    .admin-atividade-item {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+    }
+}

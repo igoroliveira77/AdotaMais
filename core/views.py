@@ -214,6 +214,10 @@ def painel_administrativo(request):
         'ultimas_solicitacoes': SolicitacaoAdocao.objects.select_related(
             'usuario', 'animal'
         ).order_by('-data_solicitacao')[:5],
+
+        'ultimos_animais': Animal.objects.order_by(
+        '-data_cadastro'
+        )[:5],
     }
 
     contexto['dados_grafico'] = {

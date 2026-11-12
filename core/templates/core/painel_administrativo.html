@@ -132,6 +132,39 @@
 
         </section>
 
+        <section class="admin-atividades">
+
+            <h2>Atividades recentes</h2>
+
+            {% if ultimos_animais %}
+
+                <div class="admin-atividade-lista">
+
+                    {% for animal in ultimos_animais %}
+
+                        <div class="admin-atividade-item">
+                            <div>
+                                <strong>Novo animal cadastrado</strong>
+                                <p>{{ animal.nome }} foi adicionado ao Adota+.</p>
+                            </div>
+
+                            <span>
+                                {{ animal.data_cadastro|date:"d/m/Y H:i" }}
+                            </span>
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <p>Nenhuma atividade registrada.</p>
+
+            {% endif %}
+
+        </section>
+
         <section class="admin-acessos">
             <h2>Gerenciamento</h2>
 
