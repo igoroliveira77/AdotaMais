@@ -107,7 +107,12 @@
 
                     <p>
                         <strong>Idade:</strong>
-                        {{ animal.idade }} anos
+                        {{ animal.idade }}
+                        {% if animal.idade == 1 %}
+                            {% if animal.unidade_idade == 'anos' %}ano{% else %}mês{% endif %}
+                        {% else %}
+                            {% if animal.unidade_idade == 'anos' %}anos{% else %}meses{% endif %}
+                        {% endif %}                    
                     </p>
 
                     <p>

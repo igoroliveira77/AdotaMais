@@ -6,6 +6,18 @@ class Animal(models.Model):
     especie = models.CharField(max_length=50)
     raca = models.CharField(max_length=100, blank=True)
     idade = models.PositiveIntegerField()
+
+    UNIDADE_IDADE_CHOICES = [
+        ('meses', 'Meses'),
+        ('anos', 'Anos'),
+    ]
+
+    unidade_idade = models.CharField(
+        max_length=5,
+        choices=UNIDADE_IDADE_CHOICES,
+        default='anos'
+    )
+
     sexo = models.CharField(max_length=20)
     cidade = models.CharField(max_length=100)
     descricao = models.TextField()
