@@ -210,6 +210,27 @@ def painel_administrativo(request):
         'solicitacoes_canceladas': SolicitacaoAdocao.objects.filter(
         status='Cancelada'
         ).count(),
+
+        'ultimas_solicitacoes': SolicitacaoAdocao.objects.select_related(
+            'usuario', 'animal'
+        ).order_by('-data_solicitacao')[:5],
+    }
+
+    contexto['dados_grafico'] = {
+        'labels': [
+            'Pendente',
+            'Em análise',
+            'Aprovada',
+            'Recusada',
+            'Cancelada',
+        ],
+        'valores': [
+            contexto['solicitacoes_pendentes'],
+            contexto['solicitacoes_em_analise'],
+            contexto['solicitacoes_aprovadas'],
+            contexto['solicitacoes_recusadas'],
+            contexto['solicitacoes_canceladas'],
+        ],
     }
 
     return render(

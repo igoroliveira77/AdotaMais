@@ -873,3 +873,97 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+
+/* ÚLTIMAS SOLICITAÇÕES DO DASHBOARD */
+
+.admin-ultimas-solicitacoes {
+    margin-top: 40px;
+}
+
+.admin-ultimas-solicitacoes h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.admin-tabela-container {
+    width: 100%;
+    overflow-x: auto;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+}
+
+.admin-tabela {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 650px;
+}
+
+.admin-tabela th,
+.admin-tabela td {
+    padding: 16px 20px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.admin-tabela th {
+    background-color: #fff5f2;
+    color: #555;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.admin-tabela td {
+    color: #555;
+    font-size: 14px;
+}
+
+.admin-tabela tbody tr:hover {
+    background-color: #fffaf8;
+}
+
+.admin-tabela tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.admin-tabela td a {
+    color: #e76f51;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.admin-tabela td a:hover {
+    text-decoration: underline;
+}
+
+.admin-status {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 20px;
+    background-color: #fff0eb;
+    color: #d65f43;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* GRÁFICO DO DASHBOARD */
+
+.admin-grafico {
+    margin-top: 40px;
+}
+
+.admin-grafico h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.admin-grafico-container {
+    width: 100%;
+    height: 350px;
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+}

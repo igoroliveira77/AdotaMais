@@ -74,6 +74,64 @@
 
         </section>
 
+        <section class="admin-grafico">
+
+            <h2>Visão geral das solicitações</h2>
+
+            <div class="admin-grafico-container">
+                <canvas id="graficoSolicitacoes"></canvas>
+            </div>
+
+        </section>
+
+        <section class="admin-ultimas-solicitacoes">
+
+            <h2>Últimas solicitações</h2>
+
+            {% if ultimas_solicitacoes %}
+
+                <div class="admin-tabela-container">
+                    <table class="admin-tabela">
+                        <thead>
+                            <tr>
+                                <th>Usuário</th>
+                                <th>Animal</th>
+                                <th>Data</th>
+                                <th>Status</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for solicitacao in ultimas_solicitacoes %}
+                            <tr>
+                                <td>{{ solicitacao.usuario.username|capfirst }}</td>
+                                <td>{{ solicitacao.animal.nome }}</td>
+                                <td>{{ solicitacao.data_solicitacao|date:"d/m/Y H:i" }}</td>
+                                <td>
+                                    <span class="admin-status">
+                                        {{ solicitacao.status }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <a href="{% url 'admin:core_solicitacaoadocao_change' solicitacao.id %}">
+                                        Visualizar
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            {% else %}
+
+                <p>Nenhuma solicitação cadastrada.</p>
+
+            {% endif %}
+
+        </section>
+
         <section class="admin-acessos">
             <h2>Gerenciamento</h2>
 
@@ -89,6 +147,53 @@
         </section>
 
     </main>
+
+    {{ dados_grafico|json_script:"dados-grafico" }}
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const dados = JSON.parse(
+            document.getElementById('dados-grafico').textContent
+        );
+
+        const elemento = document.getElementById('graficoSolicitacoes');
+
+        new Chart(elemento, {
+            type: 'bar',
+
+            data: {
+                labels: dados.labels,
+
+                datasets: [{
+                    label: 'Quantidade de solicitações',
+                    data: dados.valores,
+                    backgroundColor: [
+                        '#f4a261',
+                        '#e9c46a',
+                        '#2a9d8f',
+                        '#e76f51',
+                        '#adb5bd'
+                    ],
+                    borderRadius: 8
+                }]
+            },
+
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 
 </body>
 </html>
