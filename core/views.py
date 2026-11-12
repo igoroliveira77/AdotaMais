@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from .models import Animal, SolicitacaoAdocao
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 def inicio(request):
@@ -175,3 +176,44 @@ def cancelar_solicitacao(request, id):
     )
 
     return redirect('minhas_solicitacoes')
+
+@staff_member_required(login_url='login')
+def painel_administrativo(request):
+
+    contexto = {
+        'total_animais': Animal.objects.count(),
+
+        'animais_disponiveis': Animal.objects.filter(
+            status='Disponível'
+        ).count(),
+
+        'animais_adotados': Animal.objects.filter(
+            status='Adotado'
+        ).count(),
+
+        'solicitacoes_pendentes': SolicitacaoAdocao.objects.filter(
+            status='Pendente'
+        ).count(),
+
+        'solicitacoes_em_analise': SolicitacaoAdocao.objects.filter(
+            status='Em análise'
+        ).count(),
+
+        'solicitacoes_aprovadas': SolicitacaoAdocao.objects.filter(
+            status='Aprovada'
+        ).count(),
+
+        'solicitacoes_recusadas': SolicitacaoAdocao.objects.filter(
+            status='Recusada'
+        ).count(),
+
+        'solicitacoes_canceladas': SolicitacaoAdocao.objects.filter(
+        status='Cancelada'
+        ).count(),
+    }
+
+    return render(
+        request,
+        'core/painel_administrativo.html',
+        contexto
+    )

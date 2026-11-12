@@ -1,0 +1,94 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo | Adota+</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+</head>
+<body>
+
+    <header class="admin-header">
+        <div class="admin-navbar">
+            <h1>Adota+</h1>
+
+            <div class="admin-navbar-acoes">
+                <span>Olá, {{ user.username|capfirst }}!</span>
+                <a href="{% url 'inicio' %}">Ver site</a>
+                <a href="{% url 'logout' %}">Sair</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="admin-container">
+
+        <section class="admin-intro">
+            <h2>Painel Administrativo</h2>
+            <p>Acompanhe os dados e gerencie o Adota+.</p>
+        </section>
+
+        <section class="admin-indicadores">
+
+            <div class="admin-card">
+                <h3>Total de animais</h3>
+                <p>{{ total_animais }}</p>
+            </div>
+
+            <div class="admin-card">
+                <h3>Animais disponíveis</h3>
+                <p>{{ animais_disponiveis }}</p>
+            </div>
+
+            <div class="admin-card">
+                <h3>Animais adotados</h3>
+                <p>{{ animais_adotados }}</p>
+            </div>
+
+            <div class="admin-card">
+                <h3>Solicitações pendentes</h3>
+                <p>{{ solicitacoes_pendentes }}</p>
+            </div>
+
+            <div class="admin-card">
+                <h3>Em análise</h3>
+                <p>{{ solicitacoes_em_analise }}</p>
+            </div>
+
+            <div class="admin-card">
+                <h3>Solicitações aprovadas</h3>
+                <p>{{ solicitacoes_aprovadas }}</p>
+            </div>
+
+            <div class="admin-card">
+                <h3>Solicitações recusadas</h3>
+                <p>{{ solicitacoes_recusadas }}</p>
+            </div>
+
+            <div class="admin-card">
+                <h3>Solicitações canceladas</h3>
+                <p>{{ solicitacoes_canceladas }}</p>
+            </div>
+
+        </section>
+
+        <section class="admin-acessos">
+            <h2>Gerenciamento</h2>
+
+            <div class="admin-links">
+                <a href="{% url 'admin:core_animal_changelist' %}">
+                    Gerenciar animais
+                </a>
+
+                <a href="{% url 'admin:core_solicitacaoadocao_changelist' %}">
+                    Gerenciar solicitações
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

@@ -738,3 +738,138 @@ footer {
     color: #777;
     margin-bottom: 25px;
 }
+
+
+/* PAINEL ADMINISTRATIVO */
+
+.admin-header {
+    background-color: #fff;
+    padding: 18px 5%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.admin-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.admin-navbar h1 {
+    color: #e76f51;
+    font-size: 26px;
+    margin: 0;
+}
+
+.admin-navbar-acoes {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.admin-navbar-acoes a {
+    color: #e76f51;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.admin-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.admin-intro {
+    margin-bottom: 30px;
+}
+
+.admin-intro h2 {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.admin-intro p {
+    color: #777;
+}
+
+.admin-indicadores {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.admin-card {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+    border-left: 4px solid #e76f51;
+}
+
+.admin-card h3 {
+    color: #666;
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0 0 15px;
+}
+
+.admin-card p {
+    color: #333;
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.admin-acessos {
+    margin-top: 40px;
+}
+
+.admin-acessos h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.admin-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.admin-links a {
+    display: inline-block;
+    background-color: #e76f51;
+    color: #fff;
+    padding: 13px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.admin-links a:hover {
+    background-color: #d65f43;
+}
+
+@media (max-width: 768px) {
+    .admin-indicadores {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .admin-navbar {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .admin-navbar-acoes {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-indicadores {
+        grid-template-columns: 1fr;
+    }
+}

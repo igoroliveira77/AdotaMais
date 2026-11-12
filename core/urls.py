@@ -5,6 +5,12 @@ urlpatterns = [
     path('', views.inicio, name='inicio'),
 
     path(
+    'painel-administrativo/',
+    views.painel_administrativo,
+    name='painel_administrativo'
+    ),
+
+    path(
         'animal/<int:id>/',
         views.detalhes_animal,
         name='detalhes_animal'
