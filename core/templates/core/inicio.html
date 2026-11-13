@@ -11,7 +11,7 @@
 
     <title>Adota+ | Encontre um amigo</title>
 
-    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=7">
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=8">
 </head>
 
 <body>
@@ -96,6 +96,77 @@
             </p>
 
         </div>
+
+        
+        <!-- FILTROS DE ANIMAIS -->
+
+        <form method="GET" class="filtros-animais">
+
+            <!-- Espécie -->
+            <select name="especie">
+                <option value="">Todas as espécies</option>
+
+                {% for item in especies %}
+                    <option value="{{ item }}"
+                        {% if especie_selecionada == item %}selected{% endif %}>
+                        {{ item }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <!-- Cidade -->
+            <select name="cidade">
+                <option value="">Todas as cidades</option>
+
+                {% for item in cidades %}
+                    <option value="{{ item }}"
+                        {% if cidade_selecionada == item %}selected{% endif %}>
+                        {{ item }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <!-- Sexo -->
+            <select name="sexo">
+                <option value="">Todos os sexos</option>
+
+                {% for item in sexos %}
+                    <option value="{{ item }}"
+                        {% if sexo_selecionado == item %}selected{% endif %}>
+                        {{ item }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <!-- Idade -->
+            <select name="idade">
+                <option value="">Todas as idades</option>
+
+                <option value="filhote"
+                    {% if idade_selecionada == 'filhote' %}selected{% endif %}>
+                    Filhote
+                </option>
+
+                <option value="jovem"
+                    {% if idade_selecionada == 'jovem' %}selected{% endif %}>
+                    Jovem
+                </option>
+
+                <option value="adulto"
+                    {% if idade_selecionada == 'adulto' %}selected{% endif %}>
+                    Adulto
+                </option>
+            </select>
+
+            <button type="submit" class="btn-primary">
+                Filtrar
+            </button>
+
+            <a href="/" class="btn-limpar">
+                Limpar filtros
+            </a>
+
+        </form>
 
 
         <div class="animais-grid">

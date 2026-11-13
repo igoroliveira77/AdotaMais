@@ -5,16 +5,70 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from .models import Animal, SolicitacaoAdocao
 from django.contrib.admin.views.decorators import staff_member_required
+from django.db.models import Q
+
 
 
 def inicio(request):
     animais = Animal.objects.filter(status='Disponível')
 
+    especie = request.GET.get('especie', '').strip()
+    cidade = request.GET.get('cidade', '').strip()
+    sexo = request.GET.get('sexo', '').strip()
+    idade = request.GET.get('idade', '').strip()
+
+    if especie:
+        animais = animais.filter(especie=especie)
+
+    if cidade:
+        animais = animais.filter(cidade__icontains=cidade)
+
+    if sexo:
+        animais = animais.filter(sexo=sexo)
+
+    if idade == 'filhote':
+        animais = animais.filter(
+            Q(unidade_idade='meses', idade__lte=12) |
+            Q(unidade_idade='anos', idade__lte=1)
+        )
+
+    elif idade == 'jovem':
+        animais = animais.filter(
+            Q(unidade_idade='meses', idade__gt=12, idade__lte=60) |
+            Q(unidade_idade='anos', idade__gte=2, idade__lte=5)
+        )
+
+    elif idade == 'adulto':
+        animais = animais.filter(
+            Q(unidade_idade='meses', idade__gt=60) |
+            Q(unidade_idade='anos', idade__gt=5)
+        )
+
+    especies = Animal.objects.filter(
+        status='Disponível'
+    ).values_list('especie', flat=True).distinct().order_by('especie')
+
+    cidades = Animal.objects.filter(
+        status='Disponível'
+    ).values_list('cidade', flat=True).distinct().order_by('cidade')
+
+    sexos = Animal.objects.filter(
+    status='Disponível'
+    ).values_list('sexo', flat=True).distinct().order_by('sexo')
+
     contexto = {
-        'animais': animais
+        'animais': animais,
+        'especies': especies,
+        'cidades': cidades,
+        'especie_selecionada': especie,
+        'cidade_selecionada': cidade,
+        'sexo_selecionado': sexo,
+        'idade_selecionada': idade,
+        'sexos': sexos,
     }
 
     return render(request, 'core/inicio.html', contexto)
+
 
 
 def detalhes_animal(request, id):
