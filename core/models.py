@@ -17,7 +17,23 @@ class Animal(models.Model):
     choices=PORTE_CHOICES,
     default='Médio'
     )
-    
+
+    TEMPERAMENTO_CHOICES = [
+    ('Dócil', 'Dócil'),
+    ('Brincalhão', 'Brincalhão'),
+    ('Tranquilo', 'Tranquilo'),
+    ('Tímido', 'Tímido'),
+    ('Agitado', 'Agitado'),
+    ]
+
+    temperamento = models.CharField(
+    max_length=20,
+    choices=TEMPERAMENTO_CHOICES,
+    default='Tranquilo'
+    )
+
+    observacoes_comportamento = models.TextField(blank=True)
+
     idade = models.PositiveIntegerField()
 
     UNIDADE_IDADE_CHOICES = [

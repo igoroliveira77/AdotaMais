@@ -1162,3 +1162,28 @@ footer {
     }
 }
 
+.informacoes-comportamento {
+    margin-top: 25px;
+    padding: 18px;
+    background-color: #fff4ef;
+    border-radius: 10px;
+    border-left: 4px solid #ff795c;
+}
+
+.informacoes-comportamento p {
+    margin-bottom: 12px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.informacoes-comportamento p:last-child {
+    margin-bottom: 0;
+}
+
+.informacoes-comportamento strong {
+    color: #333;
+}
+
+.informacoes-comportamento {
+    margin-bottom: 20px;
+}

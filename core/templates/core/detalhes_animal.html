@@ -11,7 +11,7 @@
 
     <title>{{ animal.nome }} | Adota+</title>
 
-    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=8">
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=9">
 </head>
 
 <body>
@@ -133,6 +133,24 @@
                 <p class="descricao">
                     {{ animal.descricao }}
                 </p>
+
+                <div class="informacoes-comportamento">
+
+                    {% if animal.temperamento %}
+                        <p>
+                            <strong>Temperamento:</strong>
+                            {{ animal.temperamento }}
+                        </p>
+                    {% endif %}
+
+                    {% if animal.observacoes_comportamento %}
+                        <p>
+                            <strong>Comportamento:</strong>
+                            {{ animal.observacoes_comportamento }}
+                        </p>
+                    {% endif %}
+
+                </div>
 
 
                 <form method="POST" action="{% url 'solicitar_adocao' animal.id %}">
