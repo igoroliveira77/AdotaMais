@@ -191,13 +191,13 @@
                         <h3>{{ animal.nome }}</h3>
 
                         <p>
-                            {{ animal.especie }} •
+                            {{ animal.especie }} • {{ animal.porte }} •
                             {{ animal.idade }}
                             {% if animal.idade == 1 %}
                                 {% if animal.unidade_idade == 'anos' %}ano{% else %}mês{% endif %}
                             {% else %}
                                 {% if animal.unidade_idade == 'anos' %}anos{% else %}meses{% endif %}
-                            {% endif %}                        
+                            {% endif %}
                         </p>
 
                         <p>

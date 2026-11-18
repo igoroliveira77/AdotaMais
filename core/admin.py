@@ -9,8 +9,8 @@ from .models import Animal, SolicitacaoAdocao
 
 @admin.register(Animal)
 class AnimalAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'especie', 'idade_com_unidade', 'cidade', 'status')
-    list_filter = ('especie', 'status', 'cidade')
+    list_display = ('nome', 'especie', 'porte', 'idade_com_unidade', 'cidade', 'status')
+    list_filter = ('especie', 'porte', 'status', 'cidade')
     search_fields = ('nome', 'raca', 'cidade')
 
     @admin.display(description='Idade')

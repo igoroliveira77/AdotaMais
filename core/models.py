@@ -5,6 +5,19 @@ class Animal(models.Model):
     nome = models.CharField(max_length=100)
     especie = models.CharField(max_length=50)
     raca = models.CharField(max_length=100, blank=True)
+
+    PORTE_CHOICES = [
+    ('Pequeno', 'Pequeno'),
+    ('Médio', 'Médio'),
+    ('Grande', 'Grande'),
+    ]
+
+    porte = models.CharField(
+    max_length=10,
+    choices=PORTE_CHOICES,
+    default='Médio'
+    )
+    
     idade = models.PositiveIntegerField()
 
     UNIDADE_IDADE_CHOICES = [
