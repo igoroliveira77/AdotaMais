@@ -1187,3 +1187,14 @@ footer {
 .informacoes-comportamento {
     margin-bottom: 20px;
 }
+
+.solicitacao-status-container {
+    margin-top: 10px;
+}
+
+.solicitacao-status-descricao {
+    margin-top: 6px;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+}

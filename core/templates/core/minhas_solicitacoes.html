@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minhas solicitações | Adota+</title>
-    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=5">
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=6">
 </head>
 <body>
 
@@ -69,17 +69,29 @@
                                 {{ solicitacao.data_solicitacao|date:"d/m/Y H:i" }}
                             </p>
 
-                            <p>
-                                <strong>Status:</strong>
+                            <div class="solicitacao-status-container">
+                                <p>
+                                    <strong>Status:</strong>
 
-                                {% if solicitacao.status == 'Pendente' %}
-                                    <span class="solicitacao-status status-pendente">Pendente</span>
-                                {% elif solicitacao.status == 'Em análise' %}
-                                    <span class="solicitacao-status status-em-analise">Em análise</span>
-                                {% elif solicitacao.status == 'Aprovada' %}
-                                    <span class="solicitacao-status status-aprovada">Aprovada</span>
-                                {% endif %}
-                            </p>
+                                    {% if solicitacao.status == 'Pendente' %}
+                                        <span class="solicitacao-status status-pendente">Pendente</span>
+                                    {% elif solicitacao.status == 'Em análise' %}
+                                        <span class="solicitacao-status status-em-analise">Em análise</span>
+                                    {% elif solicitacao.status == 'Aprovada' %}
+                                        <span class="solicitacao-status status-aprovada">Aprovada</span>
+                                    {% endif %}
+                                </p>
+
+                                <p class="solicitacao-status-descricao">
+                                    {% if solicitacao.status == 'Pendente' %}
+                                        Sua solicitação foi recebida e aguarda avaliação.
+                                    {% elif solicitacao.status == 'Em análise' %}
+                                        Sua solicitação está sendo avaliada pela equipe.
+                                    {% elif solicitacao.status == 'Aprovada' %}
+                                        Sua solicitação foi aprovada. A adoção foi confirmada!
+                                    {% endif %}
+                                </p>
+                            </div>
 
                             <div class="solicitacao-acoes">
                                 <a
@@ -148,15 +160,25 @@
                                 {{ solicitacao.data_solicitacao|date:"d/m/Y H:i" }}
                             </p>
 
-                            <p>
-                                <strong>Status:</strong>
+                            <div class="solicitacao-status-container">
+                                <p>
+                                    <strong>Status:</strong>
 
-                                {% if solicitacao.status == 'Cancelada' %}
-                                    <span class="solicitacao-status status-cancelada">Cancelada</span>
-                                {% elif solicitacao.status == 'Recusada' %}
-                                    <span class="solicitacao-status status-recusada">Recusada</span>
-                                {% endif %}
-                            </p>
+                                    {% if solicitacao.status == 'Cancelada' %}
+                                        <span class="solicitacao-status status-cancelada">Cancelada</span>
+                                    {% elif solicitacao.status == 'Recusada' %}
+                                        <span class="solicitacao-status status-recusada">Recusada</span>
+                                    {% endif %}
+                                </p>
+
+                                <p class="solicitacao-status-descricao">
+                                    {% if solicitacao.status == 'Cancelada' %}
+                                        Esta solicitação foi cancelada por você.
+                                    {% elif solicitacao.status == 'Recusada' %}
+                                        Infelizmente, sua solicitação não foi aprovada.
+                                    {% endif %}
+                                </p>
+                            </div>
 
                             <div class="solicitacao-acoes">
                                 <a
