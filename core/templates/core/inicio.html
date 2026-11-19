@@ -11,7 +11,7 @@
 
     <title>Adota+ | Encontre um amigo</title>
 
-    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=9">
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=10">
 </head>
 
 <body>
@@ -245,6 +245,29 @@
             {% endfor %}
 
         </div>
+
+                {% if animais.has_other_pages %}
+                    <div class="paginacao">
+
+                        {% if animais.has_previous %}
+                            <a href="?{% if request.GET.urlencode %}{{ request.GET.urlencode }}&amp;{% endif %}page={{ animais.previous_page_number }}">
+                                ← Anterior
+                            </a>
+                        {% endif %}
+
+                        <span>
+                            Página {{ animais.number }} de {{ animais.paginator.num_pages }}
+                        </span>
+
+                        {% if animais.has_next %}
+                            <a href="?{% if request.GET.urlencode %}{{ request.GET.urlencode }}&amp;{% endif %}page={{ animais.next_page_number }}">
+                                Próxima →
+                            </a>
+                        {% endif %}
+
+                    </div>
+                {% endif %}
+
 
     </main>
 

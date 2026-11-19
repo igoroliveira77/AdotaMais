@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from .models import Animal, SolicitacaoAdocao
 from django.contrib.admin.views.decorators import staff_member_required
 from django.db.models import Q
+from django.core.paginator import Paginator
 
 
 
@@ -51,6 +52,12 @@ def inicio(request):
             Q(unidade_idade='meses', idade__gt=60) |
             Q(unidade_idade='anos', idade__gt=5)
         )
+
+    paginador = Paginator(animais, 6)
+
+    numero_pagina = request.GET.get('page')
+
+    animais = paginador.get_page(numero_pagina)
 
     especies = Animal.objects.filter(
         status='Disponível'
