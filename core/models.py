@@ -126,3 +126,18 @@ class Favorito(models.Model):
 
     def __str__(self):
         return f'{self.usuario.username} - {self.animal.nome}'
+
+class MensagemContato(models.Model):
+    nome = models.CharField(max_length=100)
+    email = models.EmailField()
+    assunto = models.CharField(max_length=150)
+    mensagem = models.TextField()
+    data_envio = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'mensagem de contato'
+        verbose_name_plural = 'mensagens de contato'
+        ordering = ['-data_envio']
+
+    def __str__(self):
+        return f'{self.nome} - {self.assunto}'

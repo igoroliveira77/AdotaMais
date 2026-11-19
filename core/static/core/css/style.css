@@ -1341,3 +1341,143 @@ footer {
     justify-content: center;
     margin-top: 45px;
 }
+
+
+/* CONTATO */
+
+.contato-container {
+    max-width: 1100px;
+    margin: 40px auto 0;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 30px;
+    align-items: stretch;
+}
+
+.form-contato,
+.contato-parceiro {
+    background: #fff;
+    padding: 35px;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+}
+
+.form-contato {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.campo-contato {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.campo-contato label {
+    font-weight: 600;
+    color: #333;
+}
+
+.campo-contato input,
+.campo-contato textarea {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.campo-contato input:focus,
+.campo-contato textarea:focus {
+    border-color: #ff7959;
+}
+
+.campo-contato textarea {
+    resize: vertical;
+}
+
+.form-contato button {
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    align-self: flex-start;
+}
+
+.contato-parceiro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background: #fff5f1;
+}
+
+.contato-parceiro h3 {
+    color: #333;
+    font-size: 23px;
+    margin-bottom: 15px;
+}
+
+.contato-parceiro p {
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+@media (max-width: 768px) {
+    .contato-container {
+        grid-template-columns: 1fr;
+        margin: 30px 15px 0;
+    }
+
+    .form-contato,
+    .contato-parceiro {
+        padding: 25px 20px;
+    }
+}
+
+
+/* MENSAGENS DO DJANGO */
+
+.mensagens-container {
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+.mensagem-alerta {
+    padding: 16px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    border: 1px solid transparent;
+}
+
+.mensagem-alerta.success {
+    background-color: #e8f7ed;
+    color: #246b3c;
+    border-color: #b8e2c5;
+}
+
+.mensagem-alerta.error {
+    background-color: #fdeaea;
+    color: #a52a2a;
+    border-color: #f2bcbc;
+}
+
+.mensagem-alerta.warning {
+    background-color: #fff5df;
+    color: #805b12;
+    border-color: #f0d99d;
+}
+
+.mensagem-alerta.info {
+    background-color: #e8f2fc;
+    color: #285b8e;
+    border-color: #bfd7f0;
+}
+
+

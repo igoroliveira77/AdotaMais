@@ -4,8 +4,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.db import transaction
 
-from .models import Animal, SolicitacaoAdocao
-
+from .models import Animal, SolicitacaoAdocao, MensagemContato
 
 @admin.register(Animal)
 class AnimalAdmin(admin.ModelAdmin):
@@ -190,3 +189,24 @@ class SolicitacaoAdocaoAdmin(admin.ModelAdmin):
                     Animal.objects.filter(
                         pk=animal_anterior_id
                     ).update(status='Disponível')
+
+@admin.register(MensagemContato)
+class MensagemContatoAdmin(admin.ModelAdmin):
+
+    list_display = (
+        'nome',
+        'email',
+        'assunto',
+        'data_envio',
+    )
+
+    list_filter = ('data_envio',)
+
+    search_fields = (
+        'nome',
+        'email',
+        'assunto',
+        'mensagem',
+    )
+
+    readonly_fields = ('data_envio',)

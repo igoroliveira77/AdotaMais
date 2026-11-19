@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
-from .models import Animal, SolicitacaoAdocao, Favorito
+from .models import Animal, SolicitacaoAdocao, Favorito, MensagemContato
 from django.contrib.admin.views.decorators import staff_member_required
 from django.db.models import Q
 from django.core.paginator import Paginator
@@ -380,3 +380,30 @@ def painel_administrativo(request):
         'core/painel_administrativo.html',
         contexto
     )
+
+def enviar_mensagem(request):
+    if request.method != 'POST':
+        return redirect('inicio')
+
+    nome = request.POST.get('nome', '').strip()
+    email = request.POST.get('email', '').strip()
+    assunto = request.POST.get('assunto', '').strip()
+    mensagem = request.POST.get('mensagem', '').strip()
+
+    if not all([nome, email, assunto, mensagem]):
+        messages.error(request, 'Preencha todos os campos.')
+        return redirect('inicio')
+
+    MensagemContato.objects.create(
+        nome=nome,
+        email=email,
+        assunto=assunto,
+        mensagem=mensagem
+    )
+
+    messages.success(
+        request,
+        'Mensagem enviada com sucesso! Obrigado pelo contato.'
+    )
+
+    return redirect('inicio')
