@@ -16,6 +16,8 @@ def inicio(request):
     cidade = request.GET.get('cidade', '').strip()
     sexo = request.GET.get('sexo', '').strip()
     idade = request.GET.get('idade', '').strip()
+    porte = request.GET.get('porte', '').strip()
+    temperamento = request.GET.get('temperamento', '').strip()
 
     if especie:
         animais = animais.filter(especie=especie)
@@ -25,6 +27,12 @@ def inicio(request):
 
     if sexo:
         animais = animais.filter(sexo=sexo)
+
+    if porte:
+        animais = animais.filter(porte=porte)
+
+    if temperamento:
+        animais = animais.filter(temperamento=temperamento)
 
     if idade == 'filhote':
         animais = animais.filter(
@@ -65,7 +73,11 @@ def inicio(request):
         'sexo_selecionado': sexo,
         'idade_selecionada': idade,
         'sexos': sexos,
-    }
+        'porte_selecionado': porte,
+        'temperamento_selecionado': temperamento,
+        'portes': Animal.PORTE_CHOICES,
+        'temperamentos': Animal.TEMPERAMENTO_CHOICES,
+        }
 
     return render(request, 'core/inicio.html', contexto)
 

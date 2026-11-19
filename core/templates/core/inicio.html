@@ -138,6 +138,30 @@
                 {% endfor %}
             </select>
 
+            <!-- Porte -->
+            <select name="porte">
+                <option value="">Todos os portes</option>
+
+                {% for valor, rotulo in portes %}
+                    <option value="{{ valor }}"
+                        {% if porte_selecionado == valor %}selected{% endif %}>
+                        {{ rotulo }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <!-- Temperamento -->
+            <select name="temperamento">
+                <option value="">Todos os temperamentos</option>
+
+                {% for valor, rotulo in temperamentos %}
+                    <option value="{{ valor }}"
+                        {% if temperamento_selecionado == valor %}selected{% endif %}>
+                        {{ rotulo }}
+                    </option>
+                {% endfor %}
+            </select>
+
             <!-- Idade -->
             <select name="idade">
                 <option value="">Todas as idades</option>
