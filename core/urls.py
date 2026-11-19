@@ -51,4 +51,22 @@ urlpatterns = [
     views.cancelar_solicitacao,
     name='cancelar_solicitacao'
     ),
+
+        path(
+        'animal/<int:id>/favoritar/',
+        views.adicionar_favorito,
+        name='adicionar_favorito'
+    ),
+
+    path(
+        'animal/<int:id>/remover-favorito/',
+        views.remover_favorito,
+        name='remover_favorito'
+    ),
+
+    path(
+    'meus-favoritos/',
+    views.meus_favoritos,
+    name='meus_favoritos'
+    ),
 ]

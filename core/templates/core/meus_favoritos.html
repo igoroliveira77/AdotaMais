@@ -1,0 +1,151 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Adota+ | Meus favoritos</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=12">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            🐾 Adota+
+        </div>
+
+        <nav>
+            <a href="/">Início</a>
+            <a href="/#animais">Animais</a>
+            <a href="/#sobre-nos">Sobre nós</a>
+            <a href="/#contato">Contato</a>
+        </nav>
+
+        <div class="navbar-buttons">
+            <span class="usuario-logado">
+                👤 {{ user.username|capfirst }}
+            </span>
+
+            <a href="{% url 'logout' %}" class="btn-register">Sair</a>
+        </div>
+
+    </header>
+
+    <main class="animais-section">
+
+        <div class="section-header">
+            <h2>Meus favoritos ❤️</h2>
+
+            <p>
+                Você tem {{ total_favoritos }}
+                {% if total_favoritos == 1 %}
+                    animal favorito.
+                {% else %}
+                    animais favoritos.
+                {% endif %}
+            </p>
+        </div>
+
+        <div class="animais-grid">
+
+            {% for favorito in favoritos %}
+
+                <article class="animal-card">
+
+                    <div class="animal-image">
+
+                        {% if favorito.animal.foto %}
+                            <img src="{{ favorito.animal.foto.url }}"
+                                 alt="{{ favorito.animal.nome }}">
+                        {% else %}
+                            🐾
+                        {% endif %}
+
+                        <form method="POST"
+                              action="{% url 'remover_favorito' favorito.animal.id %}"
+                              class="form-favorito">
+
+                            {% csrf_token %}
+
+                            <input type="hidden" name="pagina_origem" value="meus_favoritos">
+
+                            <button type="submit"
+                                    class="btn-favorito favoritado"
+                                    title="Remover dos favoritos">
+                                ♥
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                    <div class="animal-info">
+
+                        <h3>{{ favorito.animal.nome }}</h3>
+
+                        <p>
+                            {{ favorito.animal.especie }} •
+                            {{ favorito.animal.porte }} •
+                            {{ favorito.animal.idade }}
+                            {% if favorito.animal.idade == 1 %}
+                                {% if favorito.animal.unidade_idade == 'anos' %}ano{% else %}mês{% endif %}
+                            {% else %}
+                                {% if favorito.animal.unidade_idade == 'anos' %}anos{% else %}meses{% endif %}
+                            {% endif %}
+                        </p>
+
+                        <p>
+                            📍 {{ favorito.animal.cidade }}
+                        </p>
+
+                        <a href="{% url 'detalhes_animal' favorito.animal.id %}"
+                           class="btn-card">
+                            Ver detalhes
+                        </a>
+
+                    </div>
+
+                </article>
+
+            {% empty %}
+
+                <div class="favoritos-vazio">
+                    <span>💔</span>
+                    <h3>Nenhum favorito por enquanto</h3>
+                    <p>
+                        Explore os animais disponíveis e salve aqueles
+                        que conquistarem seu coração!
+                    </p>
+
+                    <a href="/#animais" class="btn-primary">
+                        Encontrar animais
+                    </a>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="favoritos-acoes">
+            <a href="/#animais" class="btn-primary">
+                Conhecer outros animais
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>
+            © 2026 Adota+ — Todos os direitos reservados.
+        </p>
+    </footer>
+
+</body>
+</html>

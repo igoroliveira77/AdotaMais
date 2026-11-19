@@ -96,3 +96,33 @@ class SolicitacaoAdocao(models.Model):
 
     def __str__(self):
         return f'{self.usuario.username} - {self.animal.nome}'
+
+
+class Favorito(models.Model):
+
+    usuario = models.ForeignKey(
+        'auth.User',
+        on_delete=models.CASCADE,
+        related_name='favoritos'
+    )
+
+    animal = models.ForeignKey(
+        Animal,
+        on_delete=models.CASCADE,
+        related_name='favoritos'
+    )
+
+    data_adicao = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'favorito'
+        verbose_name_plural = 'favoritos'
+        constraints = [
+            models.UniqueConstraint(
+                fields=['usuario', 'animal'],
+                name='unique_favorito_usuario_animal'
+            )
+        ]
+
+    def __str__(self):
+        return f'{self.usuario.username} - {self.animal.nome}'

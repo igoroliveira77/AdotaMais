@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
-from .models import Animal, SolicitacaoAdocao
+from .models import Animal, SolicitacaoAdocao, Favorito
 from django.contrib.admin.views.decorators import staff_member_required
 from django.db.models import Q
 from django.core.paginator import Paginator
@@ -71,8 +71,16 @@ def inicio(request):
     status='Disponível'
     ).values_list('sexo', flat=True).distinct().order_by('sexo')
 
+    animais_favoritos = []
+
+    if request.user.is_authenticated:
+        animais_favoritos = Favorito.objects.filter(
+            usuario=request.user
+        ).values_list('animal_id', flat=True)
+
     contexto = {
         'animais': animais,
+        'animais_favoritos': animais_favoritos,
         'especies': especies,
         'cidades': cidades,
         'especie_selecionada': especie,
@@ -98,6 +106,63 @@ def detalhes_animal(request, id):
     }
 
     return render(request, 'core/detalhes_animal.html', contexto)
+                  
+@login_required(login_url='login')
+def adicionar_favorito(request, id):
+    if request.method != 'POST':
+        return redirect('inicio')
+
+    animal = get_object_or_404(Animal, id=id)
+
+    favorito, criado = Favorito.objects.get_or_create(
+        usuario=request.user,
+        animal=animal
+    )
+
+    if criado:
+        messages.success(request, 'Animal adicionado aos favoritos!')
+    else:
+        messages.info(request, 'Este animal já está nos seus favoritos.')
+
+    return redirect('inicio')
+
+
+@login_required(login_url='login')
+def remover_favorito(request, id):
+    if request.method != 'POST':
+        return redirect('inicio')
+
+    favorito = get_object_or_404(
+        Favorito,
+        usuario=request.user,
+        animal_id=id
+    )
+
+    favorito.delete()
+
+    messages.success(request, 'Animal removido dos favoritos!')
+
+    pagina_origem = request.POST.get('pagina_origem')
+
+    if pagina_origem == 'meus_favoritos':
+        return redirect('meus_favoritos')
+
+    return redirect('inicio')
+
+
+@login_required(login_url='login')
+def meus_favoritos(request):
+    favoritos = Favorito.objects.filter(
+        usuario=request.user
+    ).select_related('animal').order_by('-data_adicao')
+    total_favoritos = favoritos.count()
+
+    contexto = {
+        'favoritos': favoritos,
+        'total_favoritos': total_favoritos,
+    }
+
+    return render(request, 'core/meus_favoritos.html', contexto)
 
 
 
