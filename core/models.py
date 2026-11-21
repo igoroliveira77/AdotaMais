@@ -128,10 +128,21 @@ class Favorito(models.Model):
         return f'{self.usuario.username} - {self.animal.nome}'
 
 class MensagemContato(models.Model):
+    STATUS_CHOICES = [
+        ('Não lida', 'Não lida'),
+        ('Lida', 'Lida'),
+        ('Respondida', 'Respondida'),
+    ]
+
     nome = models.CharField(max_length=100)
     email = models.EmailField()
     assunto = models.CharField(max_length=150)
     mensagem = models.TextField()
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='Não lida'
+    )
     data_envio = models.DateTimeField(auto_now_add=True)
 
     class Meta:

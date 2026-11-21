@@ -3,6 +3,7 @@ from django.contrib import admin, messages
 from django import forms
 from django.core.exceptions import ValidationError
 from django.db import transaction
+from django.utils.html import format_html
 
 from .models import Animal, SolicitacaoAdocao, MensagemContato
 
@@ -197,10 +198,11 @@ class MensagemContatoAdmin(admin.ModelAdmin):
         'nome',
         'email',
         'assunto',
+        'status_visual',
         'data_envio',
     )
 
-    list_filter = ('data_envio',)
+    list_filter = ('status', 'data_envio')
 
     search_fields = (
         'nome',
@@ -210,3 +212,21 @@ class MensagemContatoAdmin(admin.ModelAdmin):
     )
 
     readonly_fields = ('data_envio',)
+
+    @admin.display(description='Status', ordering='status')
+    def status_visual(self, obj):
+        cores = {
+            'Não lida': '#dc3545',
+            'Lida': '#0d6efd',
+            'Respondida': '#198754',
+        }
+
+        cor = cores.get(obj.status, '#6c757d')
+
+        return format_html(
+            '<span style="background-color: {}; color: white; '
+            'padding: 4px 10px; border-radius: 12px; font-weight: bold;">'
+            '{}</span>',
+            cor,
+            obj.status
+        )
