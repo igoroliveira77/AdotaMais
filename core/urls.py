@@ -41,6 +41,12 @@ urlpatterns = [
     ),
 
     path(
+    'perfil/',
+    views.perfil_usuario,
+    name='perfil'
+    ),
+
+    path(
     'animal/<int:id>/adotar/',
     views.solicitar_adocao,
     name='solicitar_adocao'

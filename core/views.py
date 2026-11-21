@@ -234,6 +234,32 @@ def cadastro_usuario(request):
     return render(request, 'core/cadastro.html')
 
 @login_required(login_url='login')
+def perfil_usuario(request):
+    usuario = request.user
+
+    if request.method == 'POST':
+        usuario.first_name = request.POST.get('first_name', '').strip()
+        usuario.last_name = request.POST.get('last_name', '').strip()
+        usuario.email = request.POST.get('email', '').strip()
+
+        usuario.save()
+
+        messages.success(request, 'Perfil atualizado com sucesso!')
+        return redirect('perfil')
+
+    contexto = {
+        'usuario': usuario,
+        'total_solicitacoes': SolicitacaoAdocao.objects.filter(
+            usuario=usuario
+        ).count(),
+        'total_favoritos': Favorito.objects.filter(
+            usuario=usuario
+        ).count(),
+    }
+
+    return render(request, 'core/perfil.html', contexto)
+
+@login_required(login_url='login')
 def solicitar_adocao(request, id):
     if request.method != 'POST':
         return redirect('detalhes_animal', id=id)

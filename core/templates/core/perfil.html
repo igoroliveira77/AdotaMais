@@ -1,0 +1,89 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meu perfil | Adota+</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=15">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            🐾 Adota+
+        </div>
+
+        <nav>
+            <a href="{% url 'inicio' %}">Início</a>
+            <a href="{% url 'minhas_solicitacoes' %}">Solicitações</a>
+            <a href="{% url 'meus_favoritos' %}">Favoritos</a>
+        </nav>
+
+        <div class="navbar-buttons">
+            <a href="{% url 'logout' %}" class="btn-register">Sair</a>
+        </div>
+    </header>
+
+    <main class="perfil-container">
+        <div class="perfil-card">
+
+            <div class="perfil-cabecalho">
+                <div class="perfil-avatar">
+                    {{ usuario.username|first|upper }}
+                </div>
+
+                <h1>Meu perfil</h1>
+                <p>Gerencie suas informações pessoais</p>
+            </div>
+
+            <div class="perfil-estatisticas">
+                <div class="perfil-estatistica">
+                    <strong>{{ total_solicitacoes }}</strong>
+                    <span>Solicitações</span>
+                </div>
+
+                <div class="perfil-estatistica">
+                    <strong>{{ total_favoritos }}</strong>
+                    <span>Favoritos</span>
+                </div>
+            </div>
+
+            <form method="POST" class="form-perfil">
+                {% csrf_token %}
+
+                <label>Nome de usuário</label>
+                <input type="text" value="{{ usuario.username }}" disabled>
+
+                <label>Nome</label>
+                <input type="text" name="first_name" value="{{ usuario.first_name }}" placeholder="Seu nome">
+
+                <label>Sobrenome</label>
+                <input type="text" name="last_name" value="{{ usuario.last_name }}" placeholder="Seu sobrenome">
+
+                <label>E-mail</label>
+                <input type="email" name="email" value="{{ usuario.email }}" required>
+
+                <button type="submit">Salvar alterações</button>
+            </form>
+
+            <div class="perfil-links">
+                <a href="{% url 'minhas_solicitacoes' %}">Minhas solicitações</a>
+                <a href="{% url 'meus_favoritos' %}">Meus favoritos</a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 Adota+ — Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
