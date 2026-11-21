@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth import update_session_auth_hash
 from .models import Animal, SolicitacaoAdocao, Favorito, MensagemContato
 from django.contrib.admin.views.decorators import staff_member_required
 from django.db.models import Q
@@ -238,14 +239,41 @@ def perfil_usuario(request):
     usuario = request.user
 
     if request.method == 'POST':
-        usuario.first_name = request.POST.get('first_name', '').strip()
-        usuario.last_name = request.POST.get('last_name', '').strip()
-        usuario.email = request.POST.get('email', '').strip()
+        acao = request.POST.get('acao')
 
-        usuario.save()
+        if acao == 'atualizar_perfil':
+            usuario.first_name = request.POST.get('first_name', '').strip()
+            usuario.last_name = request.POST.get('last_name', '').strip()
+            usuario.email = request.POST.get('email', '').strip()
 
-        messages.success(request, 'Perfil atualizado com sucesso!')
-        return redirect('perfil')
+            usuario.save()
+
+            messages.success(request, 'Perfil atualizado com sucesso!')
+            return redirect('perfil')
+
+        elif acao == 'alterar_senha':
+            senha_atual = request.POST.get('senha_atual')
+            nova_senha = request.POST.get('nova_senha')
+            confirmar_senha = request.POST.get('confirmar_senha')
+
+            if not usuario.check_password(senha_atual):
+                messages.error(request, 'A senha atual está incorreta.')
+
+            elif nova_senha != confirmar_senha:
+                messages.error(request, 'As novas senhas não coincidem.')
+
+            elif len(nova_senha) < 8:
+                messages.error(request, 'A nova senha deve ter pelo menos 8 caracteres.')
+
+            else:
+                usuario.set_password(nova_senha)
+                usuario.save()
+
+                update_session_auth_hash(request, usuario)
+
+                messages.success(request, 'Senha alterada com sucesso!')
+
+            return redirect('perfil')
 
     contexto = {
         'usuario': usuario,

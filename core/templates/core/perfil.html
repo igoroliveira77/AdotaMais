@@ -10,15 +10,13 @@
 
     <title>Meu perfil | Adota+</title>
 
-    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=15">
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=16">
 </head>
 
 <body>
 
     <header class="navbar">
-        <div class="logo">
-            🐾 Adota+
-        </div>
+        <div class="logo">🐾 Adota+</div>
 
         <nav>
             <a href="{% url 'inicio' %}">Início</a>
@@ -31,7 +29,18 @@
         </div>
     </header>
 
+    {% if messages %}
+        <div class="mensagens-container">
+            {% for message in messages %}
+                <div class="mensagem-alerta {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <main class="perfil-container">
+
         <div class="perfil-card">
 
             <div class="perfil-cabecalho">
@@ -40,10 +49,11 @@
                 </div>
 
                 <h1>Meu perfil</h1>
-                <p>Gerencie suas informações pessoais</p>
+                <p>Gerencie suas informações pessoais e sua conta.</p>
             </div>
 
             <div class="perfil-estatisticas">
+
                 <div class="perfil-estatistica">
                     <strong>{{ total_solicitacoes }}</strong>
                     <span>Solicitações</span>
@@ -53,25 +63,80 @@
                     <strong>{{ total_favoritos }}</strong>
                     <span>Favoritos</span>
                 </div>
+
             </div>
 
-            <form method="POST" class="form-perfil">
-                {% csrf_token %}
+            <section class="perfil-secao">
 
-                <label>Nome de usuário</label>
-                <input type="text" value="{{ usuario.username }}" disabled>
+                <div class="perfil-secao-cabecalho">
+                    <h2>Informações pessoais</h2>
+                    <p>Atualize seus dados de cadastro.</p>
+                </div>
 
-                <label>Nome</label>
-                <input type="text" name="first_name" value="{{ usuario.first_name }}" placeholder="Seu nome">
+                <form method="POST" class="form-perfil">
+                    {% csrf_token %}
+                    <input type="hidden" name="acao" value="atualizar_perfil">
 
-                <label>Sobrenome</label>
-                <input type="text" name="last_name" value="{{ usuario.last_name }}" placeholder="Seu sobrenome">
+                    <label>Nome de usuário</label>
+                    <input type="text" value="{{ usuario.username }}" disabled>
 
-                <label>E-mail</label>
-                <input type="email" name="email" value="{{ usuario.email }}" required>
+                    <label>Nome</label>
+                    <input type="text" name="first_name"
+                           value="{{ usuario.first_name }}"
+                           placeholder="Seu nome">
 
-                <button type="submit">Salvar alterações</button>
-            </form>
+                    <label>Sobrenome</label>
+                    <input type="text" name="last_name"
+                           value="{{ usuario.last_name }}"
+                           placeholder="Seu sobrenome">
+
+                    <label>E-mail</label>
+                    <input type="email" name="email"
+                           value="{{ usuario.email }}" required>
+
+                    <button type="submit">Salvar alterações</button>
+                </form>
+
+            </section>
+
+            <section class="perfil-secao">
+
+                <div class="perfil-secao-cabecalho">
+                    <h2>Segurança da conta</h2>
+                    <p>Altere sua senha para manter sua conta protegida.</p>
+                </div>
+
+                <form method="POST" class="form-perfil">
+                    {% csrf_token %}
+                    <input type="hidden" name="acao" value="alterar_senha">
+
+                    <label for="senha_atual">Senha atual</label>
+                    <input type="password"
+                           id="senha_atual"
+                           name="senha_atual"
+                           placeholder="Digite sua senha atual"
+                           required>
+
+                    <label for="nova_senha">Nova senha</label>
+                    <input type="password"
+                           id="nova_senha"
+                           name="nova_senha"
+                           placeholder="Digite sua nova senha"
+                           minlength="8"
+                           required>
+
+                    <label for="confirmar_senha">Confirmar nova senha</label>
+                    <input type="password"
+                           id="confirmar_senha"
+                           name="confirmar_senha"
+                           placeholder="Digite novamente sua nova senha"
+                           minlength="8"
+                           required>
+
+                    <button type="submit">Alterar senha</button>
+                </form>
+
+            </section>
 
             <div class="perfil-links">
                 <a href="{% url 'minhas_solicitacoes' %}">Minhas solicitações</a>
@@ -79,6 +144,7 @@
             </div>
 
         </div>
+
     </main>
 
     <footer>
