@@ -1,0 +1,120 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Redefinir senha | Adota+</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=19">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            🐾 Adota+
+        </div>
+
+        <nav>
+            <a href="{% url 'inicio' %}">Início</a>
+            <a href="{% url 'login' %}">Entrar</a>
+        </nav>
+
+    </header>
+
+    <main class="login-container">
+
+        <div class="login-box">
+
+            {% if validlink %}
+
+                <h1>Redefinir senha</h1>
+
+                <p class="login-subtitle">
+                    Crie uma nova senha para acessar sua conta.
+                </p>
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="id_new_password1">Nova senha</label>
+
+                        <input
+                            type="password"
+                            name="new_password1"
+                            id="id_new_password1"
+                            placeholder="Digite sua nova senha"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_new_password2">Confirmar nova senha</label>
+
+                        <input
+                            type="password"
+                            name="new_password2"
+                            id="id_new_password2"
+                            placeholder="Digite novamente sua senha"
+                            required
+                        >
+                    </div>
+
+                    {% if form.errors %}
+                        <div class="mensagem-alerta error">
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            {% endfor %}
+
+                            {% for error in form.non_field_errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <button type="submit" class="btn-login-form">
+                        Redefinir senha
+                    </button>
+
+                </form>
+
+            {% else %}
+
+                <div class="recuperacao-icone">
+                    !
+                </div>
+
+                <h1>Link inválido</h1>
+
+                <p class="login-subtitle">
+                    Este link expirou ou já foi utilizado.
+                    Solicite uma nova recuperação de senha.
+                </p>
+
+                <a href="{% url 'password_reset' %}" class="recuperacao-botao">
+                    Solicitar novo link
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>© 2026 Adota+ — Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+
+</html>

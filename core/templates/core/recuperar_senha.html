@@ -1,0 +1,84 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Recuperar senha | Adota+</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=18">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            🐾 Adota+
+        </div>
+
+        <nav>
+            <a href="{% url 'inicio' %}">Início</a>
+            <a href="{% url 'login' %}">Entrar</a>
+        </nav>
+
+    </header>
+
+    <main class="login-container">
+
+        <div class="login-box">
+
+            <h1>Recuperar senha</h1>
+
+            <p class="login-subtitle">
+                Informe seu e-mail cadastrado para receber
+                as instruções de recuperação.
+            </p>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="form-group">
+
+                    <label for="id_email">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="id_email"
+                        name="email"
+                        placeholder="Digite seu e-mail"
+                        required
+                    >
+
+                </div>
+
+                <button type="submit" class="btn-login-form">
+                    Enviar link de recuperação
+                </button>
+
+            </form>
+
+            <p class="cadastro-link">
+                <a href="{% url 'login' %}">
+                    Voltar para o login
+                </a>
+            </p>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>© 2026 Adota+ — Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+
+</html>

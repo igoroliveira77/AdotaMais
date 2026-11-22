@@ -1,0 +1,64 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>E-mail enviado | Adota+</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=19">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            🐾 Adota+
+        </div>
+
+        <nav>
+            <a href="{% url 'inicio' %}">Início</a>
+            <a href="{% url 'login' %}">Entrar</a>
+        </nav>
+
+    </header>
+
+    <main class="login-container">
+
+        <div class="login-box">
+
+            <div class="recuperacao-icone">
+                ✉
+            </div>
+
+            <h1>Verifique seu e-mail!</h1>
+
+            <p class="login-subtitle">
+                Se existir uma conta cadastrada com o e-mail informado,
+                enviaremos as instruções para redefinir sua senha.
+            </p>
+
+            <p class="recuperacao-observacao">
+                Não esqueça de verificar também sua caixa de spam.
+            </p>
+
+            <a href="{% url 'login' %}" class="recuperacao-botao">
+                Voltar para o login
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>© 2026 Adota+ — Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+
+</html>

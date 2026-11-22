@@ -1675,3 +1675,78 @@ footer {
 
 
 
+/* LINK DE RECUPERAÇÃO DE SENHA */
+
+.recuperar-senha-link {
+    display: flex;
+    justify-content: center;
+    margin-top: 14px;
+    margin-bottom: 12px;
+}
+
+.recuperar-senha-link a {
+    color: #ff7a59;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.recuperar-senha-link a:hover {
+    color: #e96b4b;
+    text-decoration: underline;
+}
+
+
+
+
+/* TELA DE CONFIRMAÇÃO DE RECUPERAÇÃO */
+
+.recuperacao-icone {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #fff0e9;
+    color: #ff7a59;
+    font-size: 34px;
+}
+
+.login-box .recuperacao-observacao {
+    margin: 22px 0;
+    color: #777;
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.recuperacao-botao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 48px;
+    box-sizing: border-box;
+    padding: 13px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #ff7a59;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    transition: opacity 0.2s;
+}
+
+.recuperacao-botao:hover {
+    opacity: 0.88;
+}
+
+
+
+

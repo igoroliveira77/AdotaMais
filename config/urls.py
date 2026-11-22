@@ -18,11 +18,51 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
+
+    path(
+        'recuperar-senha/',
+        auth_views.PasswordResetView.as_view(
+            template_name='core/recuperar_senha.html',
+            email_template_name='core/email_recuperacao_senha.txt',
+            subject_template_name='core/assunto_recuperacao_senha.txt',
+            success_url='/recuperar-senha/enviado/'
+        ),
+        name='password_reset'
+    ),
+
+    path(
+        'recuperar-senha/enviado/',
+        auth_views.PasswordResetDoneView.as_view(
+            template_name='core/senha_enviada.html'
+        ),
+        name='password_reset_done'
+    ),
+
+    path(
+        'redefinir-senha/<uidb64>/<token>/',
+        auth_views.PasswordResetConfirmView.as_view(
+            template_name='core/redefinir_senha.html',
+            success_url='/redefinir-senha/concluido/'
+        ),
+        name='password_reset_confirm'
+    ),
+
+    path(
+        'redefinir-senha/concluido/',
+        auth_views.PasswordResetCompleteView.as_view(
+            template_name='core/senha_redefinida.html'
+        ),
+        name='password_reset_complete'
+    ),
 ]
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(
+        settings.MEDIA_URL,
+        document_root=settings.MEDIA_ROOT
+    )
