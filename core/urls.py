@@ -81,4 +81,18 @@ urlpatterns = [
     views.meus_favoritos,
     name='meus_favoritos'
     ),
+
+
+    path(
+        'notificacoes/',
+        views.minhas_notificacoes,
+        name='minhas_notificacoes'
+    ),
+
+    path(
+        'notificacao/<int:id>/ler/',
+        views.marcar_notificacao_lida,
+        name='marcar_notificacao_lida'
+    ),
+
 ]

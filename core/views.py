@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import update_session_auth_hash
-from .models import Animal, SolicitacaoAdocao, Favorito, MensagemContato
+from .models import Animal, SolicitacaoAdocao, Favorito, MensagemContato, Notificacao
 from django.contrib.admin.views.decorators import staff_member_required
 from django.db.models import Q
 from django.core.paginator import Paginator
@@ -73,11 +73,18 @@ def inicio(request):
     ).values_list('sexo', flat=True).distinct().order_by('sexo')
 
     animais_favoritos = []
+    total_notificacoes_nao_lidas = 0
 
     if request.user.is_authenticated:
         animais_favoritos = Favorito.objects.filter(
             usuario=request.user
         ).values_list('animal_id', flat=True)
+
+        total_notificacoes_nao_lidas = Notificacao.objects.filter(
+            usuario=request.user,
+            lida=False
+        ).count()
+
 
     contexto = {
         'animais': animais,
@@ -93,6 +100,7 @@ def inicio(request):
         'temperamento_selecionado': temperamento,
         'portes': Animal.PORTE_CHOICES,
         'temperamentos': Animal.TEMPERAMENTO_CHOICES,
+        'total_notificacoes_nao_lidas': total_notificacoes_nao_lidas,
         }
 
     return render(request, 'core/inicio.html', contexto)
@@ -340,6 +348,47 @@ def minhas_solicitacoes(request):
     }
 
     return render(request, 'core/minhas_solicitacoes.html', contexto)
+
+
+@login_required(login_url='login')
+def minhas_notificacoes(request):
+    notificacoes = Notificacao.objects.filter(
+        usuario=request.user
+    )
+
+    total_nao_lidas = notificacoes.filter(lida=False).count()
+
+    contexto = {
+        'notificacoes': notificacoes,
+        'total_nao_lidas': total_nao_lidas,
+    }
+
+    return render(
+        request,
+        'core/minhas_notificacoes.html',
+        contexto
+    )
+
+
+@login_required(login_url='login')
+def marcar_notificacao_lida(request, id):
+    if request.method != 'POST':
+        return redirect('minhas_notificacoes')
+
+    notificacao = get_object_or_404(
+        Notificacao,
+        id=id,
+        usuario=request.user
+    )
+
+    notificacao.lida = True
+    notificacao.save(update_fields=['lida'])
+
+    messages.success(request, 'Notificação marcada como lida!')
+
+    return redirect('minhas_notificacoes')
+
+
 
 @login_required(login_url='login')
 def cancelar_solicitacao(request, id):

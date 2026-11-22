@@ -11,7 +11,7 @@
 
     <title>Adota+ | Encontre um amigo</title>
 
-    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=14">
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=15">
 </head>
 
 <body>
@@ -34,6 +34,7 @@
             🐾 Adota+
         </div>
 
+        
         <nav>
 
             <a href="/">Início</a>
@@ -43,8 +44,19 @@
             <a href="#sobre-nos">Sobre nós</a>
 
             <a href="#contato">Contato</a>
+            
+            <a href="{% url 'minhas_notificacoes' %}" class="link-notificacoes">
+                🔔 Notificações
+
+                {% if total_notificacoes_nao_lidas > 0 %}
+                    <span class="contador-notificacoes">
+                        {{ total_notificacoes_nao_lidas }}
+                    </span>
+                {% endif %}
+            </a>
 
         </nav>
+
 
         <div class="navbar-buttons">
 

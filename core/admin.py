@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.utils.html import format_html
 
-from .models import Animal, SolicitacaoAdocao, MensagemContato
+from .models import Animal, SolicitacaoAdocao, MensagemContato, Notificacao
 
 @admin.register(Animal)
 class AnimalAdmin(admin.ModelAdmin):
@@ -141,7 +141,7 @@ class SolicitacaoAdocaoAdmin(admin.ModelAdmin):
                         level=messages.ERROR
                     )
                     return
-
+            
             for solicitacao in solicitacoes:
                 solicitacao.status = 'Aprovada'
                 solicitacao.save(update_fields=['status'])
@@ -150,11 +150,18 @@ class SolicitacaoAdocaoAdmin(admin.ModelAdmin):
                     pk=solicitacao.animal_id
                 ).update(status='Adotado')
 
+                Notificacao.objects.create(
+                    usuario=solicitacao.usuario,
+                    solicitacao=solicitacao,
+                    mensagem=f'Sua solicitação para {solicitacao.animal.nome} foi aprovada!'
+                )
+
         self.message_user(
             request,
             'Solicitações aprovadas com sucesso!',
             level=messages.SUCCESS
         )
+
 
     def save_model(self, request, obj, form, change):
         with transaction.atomic():
@@ -190,6 +197,25 @@ class SolicitacaoAdocaoAdmin(admin.ModelAdmin):
                     Animal.objects.filter(
                         pk=animal_anterior_id
                     ).update(status='Disponível')
+
+            if change and status_anterior != obj.status:
+                mensagens = {
+                    'Em análise': f'Sua solicitação para {obj.animal.nome} está em análise.',
+                    'Aprovada': f'Sua solicitação para {obj.animal.nome} foi aprovada!',
+                    'Recusada': f'Sua solicitação para {obj.animal.nome} foi recusada.',
+                    'Cancelada': f'Sua solicitação para {obj.animal.nome} foi cancelada.',
+                }
+
+                mensagem = mensagens.get(obj.status)
+
+                if mensagem:
+                    Notificacao.objects.create(
+                        usuario=obj.usuario,
+                        solicitacao=obj,
+                        mensagem=mensagem
+                    )
+
+
 
 @admin.register(MensagemContato)
 class MensagemContatoAdmin(admin.ModelAdmin):

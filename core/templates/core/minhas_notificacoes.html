@@ -1,0 +1,113 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Minhas notificações | Adota+</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=20">
+</head>
+
+<body class="pagina-notificacoes">
+
+    <header class="navbar">
+        <div class="logo">🐾 Adota+</div>
+
+        <nav>
+            <a href="{% url 'inicio' %}">Início</a>
+            <a href="{% url 'perfil' %}">Meu perfil</a>
+        </nav>
+    </header>
+
+    <main class="notificacoes-container">
+
+        <div class="notificacoes-cabecalho">
+            <h1>Minhas notificações</h1>
+
+            <p>
+                Você possui {{ total_nao_lidas }} notificação(ões) não lida(s).
+            </p>
+        </div>
+
+        <div class="notificacoes-lista">
+
+            {% for notificacao in notificacoes %}
+
+                <div class="notificacao-card {% if not notificacao.lida %}nao-lida{% endif %}">
+
+                    <div class="notificacao-conteudo">
+
+                        <h3>
+                            {% if not notificacao.lida %}
+                                🔔 Nova notificação
+                            {% else %}
+                                ✓ Notificação
+                            {% endif %}
+                        </h3>
+
+                        <p>{{ notificacao.mensagem }}</p>
+
+                        <span>
+                            {{ notificacao.data_criacao|date:"d/m/Y H:i" }}
+                        </span>
+
+                    </div>
+
+                    {% if not notificacao.lida %}
+
+                        <form method="POST"
+                              action="{% url 'marcar_notificacao_lida' notificacao.id %}">
+
+                            {% csrf_token %}
+
+                            <button type="submit" class="btn-marcar-lida">
+                                Marcar como lida
+                            </button>
+
+                        </form>
+
+                    {% else %}
+
+                        <span class="notificacao-lida">
+                            Já lida
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+            {% empty %}
+
+                <div class="notificacoes-vazio">
+                    <div class="recuperacao-icone">🔔</div>
+
+                    <h2>Nenhuma notificação</h2>
+
+                    <p>
+                        Quando houver atualizações nas suas solicitações
+                        de adoção, elas aparecerão aqui.
+                    </p>
+
+                    <a href="{% url 'minhas_solicitacoes' %}"
+                       class="recuperacao-botao">
+                        Ver minhas solicitações
+                    </a>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>© 2026 Adota+ — Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>

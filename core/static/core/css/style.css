@@ -1697,9 +1697,6 @@ footer {
     text-decoration: underline;
 }
 
-
-
-
 /* TELA DE CONFIRMAÇÃO DE RECUPERAÇÃO */
 
 .recuperacao-icone {
@@ -1748,5 +1745,160 @@ footer {
 }
 
 
+/* PÁGINA DE NOTIFICAÇÕES */
+
+.notificacoes-container {
+    width: 90%;
+    max-width: 780px;
+    margin: 65px auto;
+    min-height: 55vh;
+}
+
+.notificacoes-cabecalho {
+    margin-bottom: 30px;
+}
+
+.notificacoes-cabecalho h1 {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.notificacoes-cabecalho p {
+    color: #777;
+    font-size: 15px;
+}
+
+.notificacoes-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.notificacao-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+.notificacao-card.nao-lida {
+    border-left: 4px solid #ff7a59;
+    background-color: #fffaf7;
+}
+
+.notificacao-conteudo h3 {
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.notificacao-conteudo p {
+    color: #555;
+    font-size: 15px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.notificacao-conteudo > span {
+    color: #999;
+    font-size: 13px;
+}
+
+.btn-marcar-lida {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 7px;
+    background-color: #ff7a59;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btn-marcar-lida:hover {
+    opacity: 0.85;
+}
+
+.notificacao-lida {
+    color: #198754;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.notificacoes-vazio {
+    text-align: center;
+    background: #fff;
+    padding: 45px 25px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+}
+
+.notificacoes-vazio h2 {
+    color: #333;
+    margin-bottom: 12px;
+}
+
+.notificacoes-vazio p {
+    color: #777;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+@media (max-width: 600px) {
+    .notificacao-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .notificacao-card form,
+    .btn-marcar-lida {
+        width: 100%;
+    }
+
+    .notificacoes-cabecalho h1 {
+        font-size: 23px;
+    }
+}
+
+/* ESTRUTURA DA PÁGINA DE NOTIFICAÇÕES */
+
+.pagina-notificacoes {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.pagina-notificacoes .notificacoes-container {
+    flex: 1;
+}
 
 
+/* NOTIFICAÇÕES NA NAVBAR */
+
+.link-notificacoes {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+}
+
+.contador-notificacoes {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 19px;
+    height: 19px;
+    padding: 0 5px;
+    border-radius: 50px;
+    background-color: #ff7a59;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+}

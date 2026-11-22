@@ -152,3 +152,31 @@ class MensagemContato(models.Model):
 
     def __str__(self):
         return f'{self.nome} - {self.assunto}'
+
+
+class Notificacao(models.Model):
+    usuario = models.ForeignKey(
+        'auth.User',
+        on_delete=models.CASCADE,
+        related_name='notificacoes'
+    )
+
+    solicitacao = models.ForeignKey(
+        SolicitacaoAdocao,
+        on_delete=models.CASCADE,
+        related_name='notificacoes'
+    )
+
+    mensagem = models.CharField(max_length=255)
+
+    data_criacao = models.DateTimeField(auto_now_add=True)
+
+    lida = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = 'notificação'
+        verbose_name_plural = 'notificações'
+        ordering = ['-data_criacao']
+
+    def __str__(self):
+        return f'{self.usuario.username} - {self.mensagem}'
