@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minhas solicitações | Adota+</title>
-    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=6">
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=9">
 </head>
 <body>
 
@@ -92,6 +92,83 @@
                                     {% endif %}
                                 </p>
                             </div>
+
+                            {% if solicitacao.status == 'Aprovada' %}
+
+                                {% if solicitacao.avaliacao %}
+
+                                    <div class="avaliacao-existente">
+                                        <h3>Sua avaliação</h3>
+
+                                        <div class="avaliacao-estrelas">
+                                            {% for estrela in "12345" %}
+                                                {% if forloop.counter <= solicitacao.avaliacao.nota %}
+                                                    <span class="estrela-ativa">★</span>
+                                                {% else %}
+                                                    <span class="estrela-inativa">★</span>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+
+                                        {% if solicitacao.avaliacao.comentario %}
+                                            <p>{{ solicitacao.avaliacao.comentario }}</p>
+                                        {% endif %}
+                                    </div>
+
+                                {% else %}
+
+                                    <form
+                                        action="{% url 'avaliar_adocao' solicitacao.id %}"
+                                        method="POST"
+                                        class="form-avaliacao"
+                                    >
+                                        {% csrf_token %}
+
+                                        <h3>Avalie sua adoção</h3>
+
+                                        <label class="label-avaliacao">
+                                            Escolha sua nota:
+                                        </label>
+
+                                        <div class="selecao-estrelas">
+
+                                            <input type="radio" id="nota-5-{{ solicitacao.id }}" name="nota" value="5" required>
+                                            <label for="nota-5-{{ solicitacao.id }}" title="Excelente">★</label>
+
+                                            <input type="radio" id="nota-4-{{ solicitacao.id }}" name="nota" value="4">
+                                            <label for="nota-4-{{ solicitacao.id }}" title="Muito bom">★</label>
+
+                                            <input type="radio" id="nota-3-{{ solicitacao.id }}" name="nota" value="3">
+                                            <label for="nota-3-{{ solicitacao.id }}" title="Bom">★</label>
+
+                                            <input type="radio" id="nota-2-{{ solicitacao.id }}" name="nota" value="2">
+                                            <label for="nota-2-{{ solicitacao.id }}" title="Regular">★</label>
+
+                                            <input type="radio" id="nota-1-{{ solicitacao.id }}" name="nota" value="1">
+                                            <label for="nota-1-{{ solicitacao.id }}" title="Ruim">★</label>
+
+                                        </div>
+
+                                        <label for="comentario-{{ solicitacao.id }}">
+                                            Comentário (opcional):
+                                        </label>
+
+                                        <textarea
+                                            name="comentario"
+                                            id="comentario-{{ solicitacao.id }}"
+                                            maxlength="500"
+                                            placeholder="Conte como foi sua experiência..."
+                                        ></textarea>
+
+                                        <button type="submit" class="btn-avaliar">
+                                            Enviar avaliação
+                                        </button>
+
+                                    </form>
+
+                                {% endif %}
+
+                            {% endif %}
 
                             <div class="solicitacao-acoes">
                                 <a

@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import update_session_auth_hash
-from .models import Animal, SolicitacaoAdocao, Favorito, MensagemContato, Notificacao
+from .models import Animal, SolicitacaoAdocao, Favorito, MensagemContato, Notificacao, Avaliacao
 from django.contrib.admin.views.decorators import staff_member_required
 from django.db.models import Q
 from django.core.paginator import Paginator
@@ -356,7 +356,11 @@ def solicitar_adocao(request, id):
 def minhas_solicitacoes(request):
     solicitacoes = SolicitacaoAdocao.objects.filter(
         usuario=request.user
-    ).select_related('animal').order_by('-data_solicitacao')
+    ).select_related(
+        'animal'
+    ).prefetch_related(
+        'avaliacao'
+    ).order_by('-data_solicitacao')
 
     solicitacoes_ativas = solicitacoes.filter(
         status__in=['Pendente', 'Em análise', 'Aprovada']
@@ -373,6 +377,52 @@ def minhas_solicitacoes(request):
 
     return render(request, 'core/minhas_solicitacoes.html', contexto)
 
+@login_required(login_url='login')
+def avaliar_adocao(request, id):
+
+    if request.method != 'POST':
+        return redirect('minhas_solicitacoes')
+
+    solicitacao = get_object_or_404(
+        SolicitacaoAdocao,
+        id=id,
+        usuario=request.user,
+        status='Aprovada'
+    )
+
+    if hasattr(solicitacao, 'avaliacao'):
+        messages.warning(
+            request,
+            'Esta adoção já foi avaliada.'
+        )
+        return redirect('minhas_solicitacoes')
+
+    nota = request.POST.get('nota')
+    comentario = request.POST.get('comentario', '').strip()
+
+    if nota not in ['1', '2', '3', '4', '5']:
+        messages.error(request, 'Selecione uma nota válida.')
+        return redirect('minhas_solicitacoes')
+
+    if len(comentario) > 500:
+        messages.error(
+            request,
+            'O comentário deve ter no máximo 500 caracteres.'
+        )
+        return redirect('minhas_solicitacoes')
+
+    Avaliacao.objects.create(
+        solicitacao=solicitacao,
+        nota=int(nota),
+        comentario=comentario
+    )
+
+    messages.success(
+        request,
+        'Sua avaliação foi enviada com sucesso!'
+    )
+
+    return redirect('minhas_solicitacoes')
 
 @login_required(login_url='login')
 def minhas_notificacoes(request):

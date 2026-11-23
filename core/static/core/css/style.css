@@ -1991,3 +1991,176 @@ footer {
 .perfil-exclusao .btn-excluir-conta:hover {
     background: #8f1c14;
 }
+
+/* Sistema de avaliação */
+
+.form-avaliacao,
+.avaliacao-existente {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+}
+
+.form-avaliacao h3,
+.avaliacao-existente h3 {
+    margin-bottom: 15px;
+    color: #333;
+    font-size: 18px;
+}
+
+.form-avaliacao label {
+    display: block;
+    margin: 12px 0 6px;
+    font-weight: 600;
+    color: #444;
+}
+
+.form-avaliacao select,
+.form-avaliacao textarea {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    font-size: 14px;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.form-avaliacao textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.btn-avaliar {
+    margin-top: 15px;
+    padding: 11px 18px;
+    background: #e58a24;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-avaliar:hover {
+    background: #c87316;
+}
+
+.avaliacao-estrelas {
+    margin: 8px 0;
+    font-size: 24px;
+    letter-spacing: 3px;
+}
+
+.estrela-ativa {
+    color: #f5a623;
+}
+
+.estrela-inativa {
+    color: #d1d5db;
+}
+
+.avaliacao-existente p {
+    color: #555;
+    line-height: 1.5;
+    margin-top: 10px;
+}
+
+/* Seleção de estrelas da avaliação */
+
+.label-avaliacao {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.selecao-estrelas {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 5px;
+    margin: 5px 0 18px;
+}
+
+.selecao-estrelas input {
+    display: none;
+}
+
+.selecao-estrelas label {
+    font-size: 36px;
+    color: #d1d5db;
+    cursor: pointer;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.selecao-estrelas label:hover,
+.selecao-estrelas label:hover ~ label,
+.selecao-estrelas input:checked ~ label {
+    color: #f5a623;
+}
+
+.selecao-estrelas label:hover {
+    transform: scale(1.15);
+}
+
+.form-avaliacao,
+.avaliacao-existente {
+    margin-top: 18px;
+    padding: 22px;
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+.form-avaliacao h3,
+.avaliacao-existente h3 {
+    margin-bottom: 14px;
+    color: #333;
+    font-size: 18px;
+}
+
+.form-avaliacao textarea {
+    width: 100%;
+    min-height: 85px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    resize: vertical;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.form-avaliacao textarea:focus {
+    outline: none;
+    border-color: #ff7959;
+    box-shadow: 0 0 0 3px rgba(255, 121, 89, 0.10);
+}
+
+.form-avaliacao label:not(.selecao-estrelas label) {
+    display: block;
+    margin: 12px 0 8px;
+    font-weight: 600;
+    color: #444;
+}
+
+.btn-avaliar {
+    margin-top: 14px;
+    padding: 12px 22px;
+    background: #ff7959;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.btn-avaliar:hover {
+    background: #ed6547;
+    transform: translateY(-1px);
+}

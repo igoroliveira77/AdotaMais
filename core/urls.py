@@ -65,6 +65,12 @@ urlpatterns = [
     ),
 
     path(
+    'solicitacao/<int:id>/avaliar/',
+    views.avaliar_adocao,
+    name='avaliar_adocao'
+    ),
+
+    path(
     'solicitacao/<int:id>/cancelar/',
     views.cancelar_solicitacao,
     name='cancelar_solicitacao'

@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.utils.html import format_html
 
-from .models import Animal, SolicitacaoAdocao, MensagemContato, Notificacao
+from .models import Animal, SolicitacaoAdocao, MensagemContato, Notificacao, Avaliacao
 
 @admin.register(Animal)
 class AnimalAdmin(admin.ModelAdmin):
@@ -256,3 +256,26 @@ class MensagemContatoAdmin(admin.ModelAdmin):
             cor,
             obj.status
         )
+
+@admin.register(Avaliacao)
+class AvaliacaoAdmin(admin.ModelAdmin):
+
+    list_display = (
+        'solicitacao',
+        'nota',
+        'comentario',
+        'data_avaliacao',
+    )
+
+    list_filter = (
+        'nota',
+        'data_avaliacao',
+    )
+
+    search_fields = (
+        'solicitacao__usuario__username',
+        'solicitacao__animal__nome',
+        'comentario',
+    )
+
+    readonly_fields = ('data_avaliacao',)

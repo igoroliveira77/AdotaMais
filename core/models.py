@@ -180,3 +180,36 @@ class Notificacao(models.Model):
 
     def __str__(self):
         return f'{self.usuario.username} - {self.mensagem}'
+
+class Avaliacao(models.Model):
+
+    solicitacao = models.OneToOneField(
+        SolicitacaoAdocao,
+        on_delete=models.CASCADE,
+        related_name='avaliacao'
+    )
+
+    nota = models.PositiveSmallIntegerField(
+        choices=[
+            (1, '1 estrela'),
+            (2, '2 estrelas'),
+            (3, '3 estrelas'),
+            (4, '4 estrelas'),
+            (5, '5 estrelas'),
+        ]
+    )
+
+    comentario = models.TextField(
+        max_length=500,
+        blank=True
+    )
+
+    data_avaliacao = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'avaliação'
+        verbose_name_plural = 'avaliações'
+        ordering = ['-data_avaliacao']
+
+    def __str__(self):
+        return f'{self.solicitacao.usuario.username} - {self.nota} estrelas'
