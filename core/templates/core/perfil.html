@@ -10,7 +10,7 @@
 
     <title>Meu perfil | Adota+</title>
 
-    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=16">
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}?v=18">
 </head>
 
 <body>
@@ -134,6 +134,49 @@
                            required>
 
                     <button type="submit">Alterar senha</button>
+                </form>
+
+            </section>
+
+            <section class="perfil-secao perfil-exclusao">
+
+                <div class="perfil-secao-cabecalho">
+                    <h2>Zona de perigo</h2>
+                    <p>
+                        Ao excluir sua conta, seus dados, favoritos e solicitações
+                        serão removidos permanentemente.
+                    </p>
+                </div>
+
+                <form method="POST"
+                    action="{% url 'excluir_conta' %}"
+                    class="form-perfil">
+
+                    {% csrf_token %}
+
+                    <label for="senha_exclusao">Senha atual</label>
+                    <input
+                        type="password"
+                        id="senha_exclusao"
+                        name="senha_exclusao"
+                        placeholder="Digite sua senha atual"
+                        required
+                    >
+
+                    <label class="confirmacao-exclusao">
+                        <input
+                            type="checkbox"
+                            name="confirmar_exclusao"
+                            value="sim"
+                            required
+                        >
+                        <span>Confirmo que desejo excluir permanentemente minha conta.</span>
+                    </label>
+
+                    <button type="submit" class="btn-excluir-conta">
+                        Excluir minha conta
+                    </button>
+
                 </form>
 
             </section>

@@ -296,6 +296,30 @@ def perfil_usuario(request):
     return render(request, 'core/perfil.html', contexto)
 
 @login_required(login_url='login')
+def excluir_conta(request):
+    if request.method == 'POST':
+        usuario = request.user
+
+        senha = request.POST.get('senha_exclusao')
+        confirmacao = request.POST.get('confirmar_exclusao')
+
+        if not usuario.check_password(senha):
+            messages.error(request, 'A senha informada está incorreta.')
+            return redirect('perfil')
+
+        if confirmacao != 'sim':
+            messages.error(request, 'Confirme que deseja excluir sua conta.')
+            return redirect('perfil')
+
+        logout(request)
+        usuario.delete()
+
+        messages.success(request, 'Sua conta foi excluída com sucesso!')
+        return redirect('inicio')
+
+    return redirect('perfil')
+
+@login_required(login_url='login')
 def solicitar_adocao(request, id):
     if request.method != 'POST':
         return redirect('detalhes_animal', id=id)

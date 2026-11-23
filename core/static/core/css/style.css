@@ -1902,3 +1902,92 @@ footer {
     font-size: 11px;
     font-weight: 700;
 }
+
+/* Exclusão de conta */
+
+.perfil-exclusao {
+    border: 1px solid #f1caca;
+    border-radius: 10px;
+    background-color: #fffafa;
+}
+
+.perfil-exclusao h2 {
+    color: #b42318;
+}
+
+.perfil-exclusao p {
+    color: #666;
+}
+
+.btn-excluir-conta {
+    background-color: #c62828;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-excluir-conta:hover {
+    background-color: #a61f1f;
+}
+
+/* Zona de perigo - exclusão de conta */
+
+.perfil-exclusao {
+    background: #fffafa;
+    border: 1px solid #f0d5d5;
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 25px;
+}
+
+.perfil-exclusao h2 {
+    color: #b42318;
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.perfil-exclusao p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.perfil-exclusao .form-perfil {
+    gap: 12px;
+}
+
+.perfil-exclusao .confirmacao-exclusao {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: normal;
+    font-size: 14px;
+    color: #444;
+    cursor: pointer;
+    margin: 8px 0;
+}
+
+.perfil-exclusao .confirmacao-exclusao input {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    margin: 0;
+    accent-color: #b42318;
+}
+
+.perfil-exclusao .btn-excluir-conta {
+    background: #b42318;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    padding: 13px;
+    font-weight: 600;
+    transition: background 0.2s ease;
+}
+
+.perfil-exclusao .btn-excluir-conta:hover {
+    background: #8f1c14;
+}

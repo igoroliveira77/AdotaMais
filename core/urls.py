@@ -46,6 +46,12 @@ urlpatterns = [
     name='perfil'
     ),
 
+        path(
+        'excluir-conta/',
+        views.excluir_conta,
+        name='excluir_conta'
+    ),
+
     path(
     'animal/<int:id>/adotar/',
     views.solicitar_adocao,
